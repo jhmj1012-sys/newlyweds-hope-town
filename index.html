@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>신혼희망타운 모기지 통합 계산기</title>
-    <meta name="description" content="신혼희망타운 수익공유형 모기지 계산기 및 전체 정산표(1~30년) 제공.">
     
+    <!-- SEO & Meta Tags -->
+    <title>신혼희망타운 모기지 계산기 | 수익공유형 정산표 & 월 납입금 분석</title>
+    <meta name="description" content="신혼희망타운 전용 수익공유형 모기지 계산기입니다. LTV별 예상 수익, LH 환수금, 월 납입금, 일반 대출 비교 및 전체 정산표(조기상환표)를 제공합니다.">
+    <meta name="keywords" content="신혼희망타운, 수익공유형모기지, 신희타계산기, 모기지정산표, LH환수금, 신혼부부대출, 디딤돌대출비교">
+    <meta name="author" content="Shinheeta Calculator">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph (SNS 공유 시 보이는 정보) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="신혼희망타운 모기지 통합 계산기">
+    <meta property="og:description" content="내가 낼 수익공유금은 얼마? 신희타 vs 일반대출 완벽 비교 분석기.">
+    <meta property="og:url" content="https://your-site-url.com"> <!-- 실제 도메인 입력 필요 -->
+    <link rel="canonical" href="https://your-site-url.com"> <!-- 실제 도메인 입력 필요 -->
+
     <!-- Bootstrap 5 & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     
     <style>
         :root { --primary-color: #20c997; --dark-green: #0ca678; }
-        body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; padding-top: 70px; }
+        body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; padding-top: 70px; display: flex; flex-direction: column; min-height: 100vh; }
         
         /* 네비게이션 바 */
         .navbar-custom { background: linear-gradient(135deg, #20c997 0%, #0ca678 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -24,6 +36,12 @@
         .page-section.active { display: block; }
         .calc-body { padding: 30px 25px; }
 
+        /* SEO 텍스트 섹션 스타일 */
+        .guide-section { max-width: 800px; margin: 0 auto 40px auto; background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .guide-title { font-weight: 800; color: #333; margin-bottom: 20px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        .guide-text { line-height: 1.7; color: #555; margin-bottom: 30px; font-size: 0.95rem; }
+        .guide-text h5 { font-weight: 700; color: #0ca678; margin-top: 25px; margin-bottom: 10px; }
+
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* 입력 폼 요소 */
@@ -31,8 +49,6 @@
         .step-badge { position: absolute; top: -12px; left: 15px; background: #333; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .form-label { font-weight: 700; font-size: 0.95rem; color: #444; }
         .input-group-text { background-color: #f8f9fa; }
-
-        /* 금액 한글 표기 스타일 (추가됨) */
         .money-ko { font-size: 0.8rem; color: #20c997; font-weight: bold; margin-top: 5px; margin-left: 2px; }
 
         /* LTV 버튼 그룹 */
@@ -40,11 +56,9 @@
         .btn-outline-custom { border: 1px solid #ced4da; color: #555; background-color: white; }
         .btn-outline-custom:hover { background-color: #e6fcf5; }
 
-        /* 정산표 탭 스타일 */
+        /* 정산표 스타일 */
         .nav-tabs .nav-link { color: #555; font-weight: 600; border-radius: 10px 10px 0 0; }
         .nav-tabs .nav-link.active { color: var(--primary-color); font-weight: 800; border-color: #dee2e6 #dee2e6 #fff; }
-        
-        /* 정산표 테이블 스타일 */
         .full-table-container { max-height: 600px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 0 0 8px 8px; }
         .table-rate thead th { position: sticky; top: 0; background-color: #343a40; color: white; z-index: 1; text-align: center; font-size: 0.9rem; padding: 12px 0; }
         .table-rate tbody td { text-align: center; font-size: 0.9rem; vertical-align: middle; padding: 8px 0; border-bottom: 1px solid #eee; }
@@ -55,6 +69,11 @@
         .cagr-badge { font-size: 0.85rem; margin-top: 8px; display: block; text-align: right; color: var(--dark-green); font-weight: bold; }
         
         .ad-banner { background-color: #e9ecef; height: 90px; display: flex; align-items: center; justify-content: center; color: #adb5bd; border-radius: 8px; margin: 15px 0; border: 1px dashed #ced4da; font-size: 0.8rem; }
+
+        /* 푸터 */
+        footer { margin-top: auto; background-color: #343a40; color: #adb5bd; padding: 40px 0; font-size: 0.85rem; }
+        footer a { color: #dee2e6; text-decoration: none; }
+        footer a:hover { color: #fff; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -70,7 +89,7 @@
                 <a class="nav-link" href="#" onclick="switchTab('table', this)"><i class="bi bi-table"></i> 정산표</a>
             </li>
             <li class="nav-item mx-3">
-                <a class="nav-link" href="https://apply.lh.or.kr" target="_blank"><i class="bi bi-building"></i> 분양현황</a>
+                <a class="nav-link" href="#guide-section"><i class="bi bi-book"></i> 이용가이드</a>
             </li>
         </ul>
     </div>
@@ -93,7 +112,6 @@
                         <input type="text" class="form-control text-end fw-bold" id="purchasePrice" placeholder="0" onkeyup="inputNumberFormat(this)" required>
                         <span class="input-group-text">만원</span>
                     </div>
-                    <!-- 한글 금액 표시 영역 -->
                     <div id="text-purchasePrice" class="money-ko"></div>
                 </div>
                 <div class="row">
@@ -121,10 +139,8 @@
                     <input type="text" class="form-control text-end fw-bold" id="loanAmount" placeholder="금액 자동 입력" onkeyup="inputNumberFormat(this)" required>
                     <span class="input-group-text">만원</span>
                 </div>
-                <!-- 한글 금액 표시 영역 -->
                 <div id="text-loanAmount" class="money-ko mb-2"></div>
 
-                <!-- LTV 버튼 -->
                 <div class="btn-group w-100 mb-3" role="group">
                     <button class="btn btn-outline-custom btn-sm" onclick="setLTV(70)">70%</button>
                     <button class="btn btn-outline-custom btn-sm" onclick="setLTV(60)">60%</button>
@@ -180,9 +196,7 @@
                         <input type="text" class="form-control text-end fw-bold" id="sellPrice" placeholder="0" onkeyup="updateCAGR(this)" required>
                         <span class="input-group-text">만원</span>
                     </div>
-                    <!-- 한글 금액 표시 영역 -->
                     <div id="text-sellPrice" class="money-ko"></div>
-                    
                     <span id="cagrDisplay" class="cagr-badge"></span>
                 </div>
             </div>
@@ -241,15 +255,12 @@
                 </tbody>
             </table>
 
-            <!-- 월 납부액 비교 카드 -->
             <div class="card border-0 bg-light mb-3">
                 <div class="card-body p-3">
                     <h6 class="card-title fw-bold small mb-3 text-center">
                         <i class="bi bi-wallet2"></i> 월 예상 납부액 비교
                     </h6>
-                    
                     <div class="row g-2">
-                        <!-- 신혼희망타운 -->
                         <div class="col-6">
                             <div class="p-2 bg-white rounded border text-center h-100">
                                 <div class="badge bg-success mb-2">신혼희망타운</div>
@@ -259,8 +270,6 @@
                                 <div class="fw-bold text-success fs-5"><span id="pmtFull">0</span>원</div>
                             </div>
                         </div>
-
-                        <!-- 일반 주담대 -->
                         <div class="col-6">
                             <div class="p-2 bg-white rounded border text-center h-100">
                                 <div class="badge bg-secondary mb-2">일반 주담대</div>
@@ -277,57 +286,141 @@
 
             <div class="ad-banner"><span>광고 영역 (결과창)</span></div>
         </div>
+    </div>
+</div>
 
-        <div class="text-center mt-4 pt-3 border-top">
-            <p class="text-muted" style="font-size: 0.7rem;">
-                * 본 계산기는 시뮬레이션 용도이며 법적 효력이 없습니다.<br>
-                * LTV 70% 구간의 자녀 수별 최저한도(20%, 15%)가 적용되었습니다.<br>
-                * 실제 대출 조건 및 세금에 따라 결과가 달라질 수 있습니다.
-            </p>
+<!-- PAGE 2: 정산표 -->
+<div id="page-table" class="page-section">
+    <div class="calc-body text-dark">
+        <h4 class="fw-bold text-center mb-4">📜 수익공유 모기지 정산표</h4>
+        <div class="ad-banner"><span>광고 영역</span></div>
+        <ul class="nav nav-tabs mb-0 justify-content-center" id="tableTabs" role="tablist">
+            <li class="nav-item"><button class="nav-link active" id="tab-btn-70" data-bs-toggle="tab" data-bs-target="#content-70" type="button">70%</button></li>
+            <li class="nav-item"><button class="nav-link" id="tab-btn-60" data-bs-toggle="tab" data-bs-target="#content-60" type="button">60%</button></li>
+            <li class="nav-item"><button class="nav-link" id="tab-btn-50" data-bs-toggle="tab" data-bs-target="#content-50" type="button">50%</button></li>
+            <li class="nav-item"><button class="nav-link" id="tab-btn-40" data-bs-toggle="tab" data-bs-target="#content-40" type="button">40%</button></li>
+            <li class="nav-item"><button class="nav-link" id="tab-btn-30" data-bs-toggle="tab" data-bs-target="#content-30" type="button">30%</button></li>
+        </ul>
+        <div class="tab-content" id="tableTabContent">
+            <div class="tab-pane fade show active" id="content-70"></div>
+            <div class="tab-pane fade" id="content-60"></div>
+            <div class="tab-pane fade" id="content-50"></div>
+            <div class="tab-pane fade" id="content-40"></div>
+            <div class="tab-pane fade" id="content-30"></div>
+        </div>
+        <p class="text-center text-muted small mt-3">※ 보유기간 1~9년차는 고정비율, 10년차부터 매년 2%p씩 차감.</p>
+    </div>
+</div>
+
+<!-- SEO 콘텐츠 섹션 (애드센스 승인 필수 요소) -->
+<section id="guide-section" class="guide-section">
+    <h3 class="guide-title">📖 신혼희망타운 수익공유형 모기지 완벽 가이드</h3>
+    <div class="guide-text">
+        <h5>1. 신혼희망타운 모기지란?</h5>
+        <p>
+            신혼희망타운 전용 수익공유형 모기지는 신혼부부의 주거비 부담을 줄이기 위해 연 1.3%(고정금리)의 초저금리로 집값의 최대 70%까지 대출해주는 상품입니다. 
+            대신, 향후 주택을 매도하거나 대출을 상환할 때 발생한 시세차익의 일부를 LH(한국토지주택공사)와 공유해야 합니다.
+        </p>
+
+        <h5>2. 수익공유 비율은 어떻게 결정되나요?</h5>
+        <p>
+            수익공유 비율은 <strong>대출 비율(LTV)</strong>, <strong>자녀 수</strong>, <strong>대출 기간(보유 기간)</strong>의 세 가지 요소에 의해 결정됩니다.
+            LTV가 높을수록, 자녀가 적을수록 LH가 가져가는 비율이 높습니다. 하지만 자녀 수가 늘어나거나 보유 기간이 길어질수록(최대 70% 구간 제외) 환수율은 점차 감소합니다.
+        </p>
+        <ul>
+            <li><strong>LTV 70%:</strong> 수익의 최대 50%까지 공유 (자녀 수 및 기간에 따라 인하)</li>
+            <li><strong>정산 시점:</strong> 주택 매도 시, 대출 만기 시, 또는 조기 상환 시 정산합니다.</li>
+        </ul>
+
+        <h5>3. 계산기 사용 팁</h5>
+        <p>
+            본 계산기는 복잡한 정산표를 자동으로 계산하여, <strong>'내가 실제로 손에 쥐는 수익'</strong>이 얼마인지 알려줍니다.
+            특히 일반 시중 은행 주담대(4~5%대 금리)를 받았을 때와 비교하여, 시세차익을 나누더라도 이자를 아끼는 것이 더 이득인지 분석해 줍니다.
+            월 납입금 비교 기능을 통해 매달 나가는 현금 흐름도 체크해 보세요.
+        </p>
+        
+        <div class="alert alert-light border mt-3 small">
+            <strong>참고:</strong> 본 도구는 2024년 기준 LH 신혼희망타운 입주자 모집 공고문의 정산표를 기반으로 제작되었습니다. 정확한 법적 판단은 관계 기관에 문의하시기 바랍니다.
+        </div>
+    </div>
+</section>
+
+<!-- 푸터 (법적 고지 링크) -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h5 class="fw-bold text-white mb-2">신희타 계산기</h5>
+                <p class="text-muted small">
+                    예비 신혼부부의 내 집 마련을 응원합니다.<br>
+                    복잡한 수익공유형 모기지 정산을 한눈에 확인하세요.
+                </p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item"><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a></li>
+                    <li class="list-inline-item border-start border-secondary ps-2"><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a></li>
+                    <li class="list-inline-item border-start border-secondary ps-2"><a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">책임한계 및 법적고지</a></li>
+                </ul>
+                <p class="small text-muted">© 2024 Shinheeta Calc. All rights reserved.</p>
+                <div class="small text-muted mt-2">
+                    <!-- 사이트맵 링크 (실제로는 페이지 내 이동이나, SEO상 구조적 링크로 인식됨) -->
+                    <a href="#" onclick="switchTab('calc')">계산기</a> | 
+                    <a href="#" onclick="switchTab('table')">정산표</a> | 
+                    <a href="#guide-section">이용가이드</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- 법적 고지 모달들 -->
+<!-- 1. 책임한계 및 법적고지 -->
+<div class="modal fade" id="disclaimerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">책임한계 및 법적고지</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body small text-secondary">
+                <p>본 서비스에서 제공하는 모든 계산 결과와 정보는 사용자의 편의를 위한 시뮬레이션 값이며, 실제 대출 실행 시점의 정책, 세법, LH의 기준에 따라 달라질 수 있습니다.</p>
+                <p>본 사이트의 운영자는 계산 결과의 정확성, 완전성, 신뢰성에 대해 법적인 책임을 지지 않습니다. 주택 매매 및 대출 계약과 관련된 최종 결정은 반드시 관계 기관(LH 등) 및 전문가와 상의하시기 바랍니다.</p>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- PAGE 2: 정산표 (전체) -->
-<div id="page-table" class="page-section">
-    <div class="calc-body text-dark">
-        <h4 class="fw-bold text-center mb-4">📜 수익공유 모기지 정산표</h4>
-        
-        <div class="ad-banner"><span>광고 영역</span></div>
-
-        <!-- 탭 네비게이션 -->
-        <ul class="nav nav-tabs mb-0 justify-content-center" id="tableTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="tab-btn-70" data-bs-toggle="tab" data-bs-target="#content-70" type="button" role="tab">70%</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-btn-60" data-bs-toggle="tab" data-bs-target="#content-60" type="button" role="tab">60%</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-btn-50" data-bs-toggle="tab" data-bs-target="#content-50" type="button" role="tab">50%</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-btn-40" data-bs-toggle="tab" data-bs-target="#content-40" type="button" role="tab">40%</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-btn-30" data-bs-toggle="tab" data-bs-target="#content-30" type="button" role="tab">30%</button>
-            </li>
-        </ul>
-
-        <!-- 탭 콘텐츠 -->
-        <div class="tab-content" id="tableTabContent">
-            <!-- 탭 내용은 JS로 자동 생성됩니다 -->
-            <div class="tab-pane fade show active" id="content-70" role="tabpanel"></div>
-            <div class="tab-pane fade" id="content-60" role="tabpanel"></div>
-            <div class="tab-pane fade" id="content-50" role="tabpanel"></div>
-            <div class="tab-pane fade" id="content-40" role="tabpanel"></div>
-            <div class="tab-pane fade" id="content-30" role="tabpanel"></div>
+<!-- 2. 개인정보처리방침 -->
+<div class="modal fade" id="privacyModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">개인정보처리방침</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body small text-secondary">
+                <p><strong>1. 개인정보의 수집 및 이용</strong><br>
+                본 사이트('신혼희망타운 계산기')는 별도의 회원가입 절차가 없으며, 사용자가 입력한 금융 정보(분양가, 대출금 등)를 서버에 저장하지 않습니다. 모든 연산은 사용자의 브라우저 내에서만 이루어집니다.</p>
+                <p><strong>2. 쿠키(Cookie)의 운용</strong><br>
+                본 사이트는 방문자 분석 및 광고 게재(Google AdSense)를 위해 쿠키를 사용할 수 있습니다. 사용자는 브라우저 설정을 통해 쿠키 저장을 거부할 수 있습니다.</p>
+            </div>
         </div>
+    </div>
+</div>
 
-        <p class="text-center text-muted small mt-3">
-            ※ 보유기간 1~9년차는 고정비율, 10년차부터 매년 2%p씩 차감.<br>
-            ※ LTV 70% 구간은 20% 및 15% 하한선 존재.
-        </p>
+<!-- 3. 이용약관 -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">이용약관</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body small text-secondary">
+                <p>본 사이트는 무료로 제공되며, 사용자는 본 사이트를 이용함으로써 본 약관에 동의한 것으로 간주합니다. 사이트 내의 콘텐츠를 무단으로 복제하거나 상업적으로 이용하는 것을 금지합니다.</p>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -336,9 +429,12 @@
     // --- 1. 탭 전환 및 초기화 ---
     function switchTab(pageId, navElement) {
         document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-        document.getElementById('page-' + pageId).classList.add('active');
+        if(pageId === 'calc' || pageId === 'table') {
+            document.getElementById('page-' + pageId).classList.add('active');
+        }
         document.querySelectorAll('.navbar-nav .nav-link').forEach(el => el.classList.remove('active'));
         if(navElement) navElement.classList.add('active');
+        window.scrollTo(0, 0);
     }
 
     window.onload = function() {
@@ -369,7 +465,6 @@
         checkInputs();
     }
 
-    // [NEW] 한글 금액 변환 함수
     function koreanMoney(val) {
         if (!val || val == 0) return "";
         const eok = Math.floor(val / 10000);
@@ -381,14 +476,12 @@
         return "(" + str.trim() + ")";
     }
 
-    // [MODIFIED] 입력값 체크 및 한글 금액 업데이트
     function checkInputs() {
         const price = getNum('purchasePrice');
         const loan = getNum('loanAmount');
         const ltvBox = document.getElementById('ltvDisplay');
         const limitMsg = document.getElementById('limitWarning');
 
-        // 한글 금액 표시 업데이트
         document.getElementById('text-purchasePrice').innerText = koreanMoney(price);
         document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
 
@@ -432,11 +525,8 @@
 
     function updateCAGR(obj) {
         if(obj) inputNumberFormat(obj);
-        
         const buy = getNum('purchasePrice');
         const sell = getNum('sellPrice');
-
-        // [NEW] 매도 가격 한글 표시 업데이트
         document.getElementById('text-sellPrice').innerText = koreanMoney(sell);
 
         const startStr = document.getElementById('startDate').value;
@@ -459,7 +549,6 @@
         }
     }
 
-    // --- 3. 정산표 전체 생성 로직 (1~30년) ---
     function generateAllTables() {
         const configs = [
             { id: 'content-70', ltv: 70, start: [50, 40, 30], min: [20, 15, 10] },
@@ -476,13 +565,11 @@
                     <thead><tr><th>보유기간</th><th>0자녀</th><th>1자녀</th><th>2자녀+</th></tr></thead>
                     <tbody>
             `;
-
             for(let yr = 1; yr <= 30; yr++) {
                 let reduce = (yr < 10) ? 0 : (yr - 9) * 2;
                 let r0 = Math.max(cfg.min[0], cfg.start[0] - reduce);
                 let r1 = Math.max(cfg.min[1], cfg.start[1] - reduce);
                 let r2 = Math.max(cfg.min[2], cfg.start[2] - reduce);
-
                 html += `<tr>
                     <td><strong>${yr}년</strong></td>
                     <td class="${r0===cfg.min[0] ? 'text-primary fw-bold':''}">${r0}%</td>
@@ -495,7 +582,6 @@
         });
     }
 
-    // --- 4. 메인 계산 ---
     function calculate() {
         try {
             const price = getNum('purchasePrice');
@@ -521,14 +607,11 @@
             if (durationYears <= 0) { alert("매도 시기가 잘못되었습니다."); return; }
 
             const gain = sell - price;
-
-            // 환수금 계산
             const ltv = (loan / price) * 100;
             let shareRate = 0;
             if (gain > 0 && ltv >= 30) {
                 let bucket = Math.ceil(ltv / 10) * 10;
                 if(bucket < 30) bucket = 30; if(bucket > 70) bucket = 70;
-
                 const baseRates = {
                     70: [50, 40, 30], 60: [45, 35, 25], 50: [40, 30, 20],
                     40: [35, 25, 15], 30: [30, 20, 10]
@@ -536,7 +619,6 @@
                 let startRate = baseRates[bucket][kids];
                 let reduction = Math.max(0, Math.floor(durationYears) - 9) * 2;
                 let calcRate = startRate - reduction;
-
                 let minLimit = 10;
                 if (bucket === 70) {
                     if (kids === 0) minLimit = 20;
@@ -545,15 +627,11 @@
                 shareRate = Math.max(calcRate, minLimit);
             }
             const shareAmount = (gain > 0) ? gain * (shareRate / 100) : 0;
-
-            // 이자 계산 (만원 단위 기준)
             const hopeResult = calcLoanDetails(loan, hopeRate/100, term, durationYears, 1);
             const normResult = calcLoanDetails(loan, normRate/100, 30, durationYears, 0);
-
             const hopeProfit = gain - shareAmount - hopeResult.totalInterest;
             const normProfit = gain - normResult.totalInterest;
 
-            // 결과 표시 (단위: 만원)
             document.getElementById('resGain').innerText = comma(gain);
             document.getElementById('resHopeInt').innerText = comma(Math.round(hopeResult.totalInterest));
             document.getElementById('resNormInt').innerText = comma(Math.round(normResult.totalInterest));
@@ -562,7 +640,6 @@
             document.getElementById('resHopeProfit').innerText = comma(Math.round(hopeProfit));
             document.getElementById('resNormProfit').innerText = comma(Math.round(normProfit));
 
-            // 월 납부액 표시 (단위: 원)
             const hopeMonthly = Math.round(hopeResult.monthlyFull * 10000);
             const hopeInterestOnly = Math.round(hopeResult.monthlyInterestOnly * 10000);
             const normMonthly = Math.round(normResult.monthlyFull * 10000);
@@ -588,11 +665,7 @@
 
             document.getElementById('resultBox').style.display = 'block';
             document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
-
-        } catch (e) {
-            console.error(e);
-            alert("오류: " + e.message);
-        }
+        } catch (e) { console.error(e); alert("오류: " + e.message); }
     }
 
     function calcLoanDetails(principal, annualRate, totalYears, holdYears, graceYears) {
@@ -601,14 +674,12 @@
         const totalMonths = totalYears * 12;
         const graceMonths = graceYears * 12;
         const holdMonths = Math.floor(holdYears * 12);
-
         const monthlyInterestOnly = principal * monthlyRate;
         const repayMonths = totalMonths - graceMonths;
         let monthlyFull = 0;
         if (repayMonths > 0) {
             monthlyFull = principal * (monthlyRate * Math.pow(1+monthlyRate, repayMonths)) / (Math.pow(1+monthlyRate, repayMonths) - 1);
         }
-
         let totalInterestPaid = 0;
         let balance = principal;
         for(let m=1; m <= holdMonths; m++) {
@@ -625,6 +696,5 @@
         return { totalInterest: totalInterestPaid, monthlyInterestOnly: monthlyInterestOnly, monthlyFull: monthlyFull };
     }
 </script>
-
 </body>
 </html>
