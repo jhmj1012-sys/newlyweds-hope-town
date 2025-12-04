@@ -14,7 +14,7 @@
         :root { --primary-color: #20c997; --dark-green: #0ca678; }
         body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; padding-top: 70px; }
         
-        /* 네비게이션 바 (CSS 수정됨: 상단 메뉴바 글씨만 흰색으로 강제) */
+        /* 네비게이션 바 */
         .navbar-custom { background: linear-gradient(135deg, #20c997 0%, #0ca678 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .navbar-custom .nav-link { color: rgba(255,255,255,0.9) !important; font-weight: 600; font-size: 1rem; }
         .navbar-custom .nav-link.active { color: #fff !important; font-weight: 800; border-bottom: 3px solid #fff; }
@@ -31,6 +31,9 @@
         .step-badge { position: absolute; top: -12px; left: 15px; background: #333; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
         .form-label { font-weight: 700; font-size: 0.95rem; color: #444; }
         .input-group-text { background-color: #f8f9fa; }
+
+        /* 금액 한글 표기 스타일 (추가됨) */
+        .money-ko { font-size: 0.8rem; color: #20c997; font-weight: bold; margin-top: 5px; margin-left: 2px; }
 
         /* LTV 버튼 그룹 */
         .btn-check:checked + .btn-outline-custom { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
@@ -75,7 +78,7 @@
 
 <!-- PAGE 1: 모기지 계산기 -->
 <div id="page-calc" class="page-section active">
-    <div class="calc-body text-dark"> <!-- text-dark 추가로 글씨 검정색 보장 -->
+    <div class="calc-body text-dark">
         
         <div class="ad-banner"><span>광고 영역 (상단)</span></div>
 
@@ -90,6 +93,8 @@
                         <input type="text" class="form-control text-end fw-bold" id="purchasePrice" placeholder="0" onkeyup="inputNumberFormat(this)" required>
                         <span class="input-group-text">만원</span>
                     </div>
+                    <!-- 한글 금액 표시 영역 -->
+                    <div id="text-purchasePrice" class="money-ko"></div>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -116,6 +121,9 @@
                     <input type="text" class="form-control text-end fw-bold" id="loanAmount" placeholder="금액 자동 입력" onkeyup="inputNumberFormat(this)" required>
                     <span class="input-group-text">만원</span>
                 </div>
+                <!-- 한글 금액 표시 영역 -->
+                <div id="text-loanAmount" class="money-ko mb-2"></div>
+
                 <!-- LTV 버튼 -->
                 <div class="btn-group w-100 mb-3" role="group">
                     <button class="btn btn-outline-custom btn-sm" onclick="setLTV(70)">70%</button>
@@ -172,6 +180,9 @@
                         <input type="text" class="form-control text-end fw-bold" id="sellPrice" placeholder="0" onkeyup="updateCAGR(this)" required>
                         <span class="input-group-text">만원</span>
                     </div>
+                    <!-- 한글 금액 표시 영역 -->
+                    <div id="text-sellPrice" class="money-ko"></div>
+                    
                     <span id="cagrDisplay" class="cagr-badge"></span>
                 </div>
             </div>
@@ -230,7 +241,7 @@
                 </tbody>
             </table>
 
-            <!-- 월 납부액 비교 카드 (수정됨) -->
+            <!-- 월 납부액 비교 카드 -->
             <div class="card border-0 bg-light mb-3">
                 <div class="card-body p-3">
                     <h6 class="card-title fw-bold small mb-3 text-center">
@@ -279,7 +290,7 @@
 
 <!-- PAGE 2: 정산표 (전체) -->
 <div id="page-table" class="page-section">
-    <div class="calc-body text-dark"> <!-- text-dark 추가 -->
+    <div class="calc-body text-dark">
         <h4 class="fw-bold text-center mb-4">📜 수익공유 모기지 정산표</h4>
         
         <div class="ad-banner"><span>광고 영역</span></div>
@@ -336,7 +347,12 @@
     }
 
     // --- 2. 입력 및 계산 유틸 ---
-    function inputNumberFormat(obj) { obj.value = comma(uncomma(obj.value)); updateCAGR(); checkInputs(); }
+    function inputNumberFormat(obj) { 
+        obj.value = comma(uncomma(obj.value)); 
+        updateCAGR(); 
+        checkInputs(); 
+    }
+
     function comma(str) { return String(str).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); }
     function uncomma(str) { return String(str).replace(/[^\d]+/g, ''); }
     function getNum(id) { return parseFloat(uncomma(document.getElementById(id).value)) || 0; }
@@ -353,11 +369,28 @@
         checkInputs();
     }
 
+    // [NEW] 한글 금액 변환 함수
+    function koreanMoney(val) {
+        if (!val || val == 0) return "";
+        const eok = Math.floor(val / 10000);
+        const man = val % 10000;
+        let str = "";
+        if (eok > 0) str += `${eok}억 `;
+        if (man > 0) str += `${comma(man)}만원`;
+        if (str === "") return "";
+        return "(" + str.trim() + ")";
+    }
+
+    // [MODIFIED] 입력값 체크 및 한글 금액 업데이트
     function checkInputs() {
         const price = getNum('purchasePrice');
         const loan = getNum('loanAmount');
         const ltvBox = document.getElementById('ltvDisplay');
         const limitMsg = document.getElementById('limitWarning');
+
+        // 한글 금액 표시 업데이트
+        document.getElementById('text-purchasePrice').innerText = koreanMoney(price);
+        document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
 
         if (price > 0 && loan > 0) {
             const ltv = (loan / price) * 100;
@@ -402,6 +435,10 @@
         
         const buy = getNum('purchasePrice');
         const sell = getNum('sellPrice');
+
+        // [NEW] 매도 가격 한글 표시 업데이트
+        document.getElementById('text-sellPrice').innerText = koreanMoney(sell);
+
         const startStr = document.getElementById('startDate').value;
         const endStr = document.getElementById('endDate').value;
         if(!startStr || !endStr) return;
@@ -525,7 +562,7 @@
             document.getElementById('resHopeProfit').innerText = comma(Math.round(hopeProfit));
             document.getElementById('resNormProfit').innerText = comma(Math.round(normProfit));
 
-            // [수정] 월 납부액 표시 (단위: 원, 10000 곱하기)
+            // 월 납부액 표시 (단위: 원)
             const hopeMonthly = Math.round(hopeResult.monthlyFull * 10000);
             const hopeInterestOnly = Math.round(hopeResult.monthlyInterestOnly * 10000);
             const normMonthly = Math.round(normResult.monthlyFull * 10000);
