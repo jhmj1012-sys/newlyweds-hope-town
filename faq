@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9QNZ3LHS9"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-T9QNZ3LHS9');</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신혼희망타운 자주 묻는 질문 (FAQ)</title>
+    <meta name="description" content="신혼희망타운 모기지 관련 자주 묻는 질문 모음. 중도상환 수수료, 이혼 시 수익공유 문제, 전세 가능 여부 등을 정리했습니다.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7715950782331375" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-dark navbar-custom fixed-top">
+    <div class="container-fluid justify-content-center">
+        <ul class="navbar-nav flex-row">
+            <li class="nav-item mx-3"><a class="nav-link" href="index.html">계산기</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" href="table.html">정산표</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" href="guide.html">가이드</a></li>
+            <li class="nav-item mx-3"><a class="nav-link active" href="faq.html">FAQ</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-container">
+    <h2 class="content-title text-center">❓ 자주 묻는 질문 (FAQ)</h2>
+    
+    <div class="text-content">
+        <div class="accordion" id="faqAccordion">
+            
+            <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        Q1. 대출 기간 중에 중도상환이 가능한가요?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body bg-light">
+                        <strong>가능합니다.</strong> 하지만 신혼희망타운 모기지는 중도상환 시점에 '조기 정산'을 해야 합니다. 즉, 은행에 상환을 신청하면 감정평가를 통해 현재 집값을 산정하고, 발생한 시세차익에 대한 환수금을 즉시 납부해야 합니다. 3년 이내 상환 시에는 중도상환수수료가 발생할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Q2. 거주 의무 기간 중에 전세를 줄 수 있나요?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body bg-light">
+                        <strong>원칙적으로 불가능합니다.</strong> 공공분양주택은 투기 방지를 위해 '거주 의무 기간(지역별 상이, 보통 3~5년)'이 설정되어 있습니다. 이 기간 동안에는 반드시 본인이 실거주해야 하며, 이를 어길 시 당첨 취소 및 형사 처벌 대상이 될 수 있습니다. 단, 해외 발령 등 예외적인 사유가 인정될 경우는 LH의 동의 하에 가능할 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        Q3. 자녀 수는 언제 기준으로 확정되나요?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body bg-light">
+                        입주 시점에 자녀 수에 따라 초기 수익공유 비율이 결정됩니다. 하지만 중요한 점은 <strong>'정산 시점'의 자녀 수가 최종 반영</strong>된다는 것입니다. 입주 후 자녀를 낳으면 정산할 때 자녀 수가 늘어난 것으로 인정되어 환수 비율 혜택을 받을 수 있습니다.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item mb-3 border rounded overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                        Q4. 집값이 떨어지면 어떻게 되나요?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body bg-light">
+                        신혼희망타운 모기지는 수익뿐만 아니라 <strong>손실도 공유</strong>합니다. 만약 매도 시점에 집값이 분양가보다 떨어졌다면, 손실액의 일부(비율은 수익공유 비율과 동일)만큼 대출 원금에서 차감해줍니다. 즉, 집값 하락에 대한 방어막 역할을 어느 정도 해줍니다.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container text-center">
+        <p class="small text-muted">© 2024 Shinheeta Calculator.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
