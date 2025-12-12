@@ -1,0 +1,52 @@
+:root { --primary-color: #20c997; --dark-green: #0ca678; }
+body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; padding-top: 60px; display: flex; flex-direction: column; min-height: 100vh; }
+
+.navbar-custom { background: linear-gradient(135deg, #20c997 0%, #0ca678 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.navbar-custom .nav-link { color: rgba(255,255,255,0.9) !important; font-weight: 600; font-size: 1rem; }
+.navbar-custom .nav-link:hover { color: #fff !important; }
+.navbar-custom .nav-link.active { color: #fff !important; font-weight: 800; border-bottom: 2px solid #fff; }
+
+.main-header { text-align: center; padding: 40px 20px 20px 20px; }
+.main-header h1 { font-size: 1.8rem; font-weight: 800; color: #333; margin-bottom: 5px; }
+.main-header p { color: #666; font-size: 0.95rem; }
+
+.page-container { max-width: 800px; margin: 0 auto 60px auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; padding: 40px; }
+.calc-container { max-width: 600px; } /* 계산기는 조금 더 좁게 */
+
+.step-section { margin-bottom: 25px; border: 1px solid #eee; border-radius: 12px; padding: 20px; background-color: #fff; position: relative; }
+.step-badge { position: absolute; top: -12px; left: 15px; background: #333; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+.form-label { font-weight: 700; font-size: 0.95rem; color: #444; }
+.input-group-text { background-color: #f8f9fa; }
+.money-ko { font-size: 0.8rem; color: #20c997; font-weight: bold; margin-top: 5px; margin-left: 2px; }
+
+.btn-check:checked + .btn-outline-custom { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
+.btn-outline-custom { border: 1px solid #ced4da; color: #555; background-color: white; }
+.btn-outline-custom:hover { background-color: #e6fcf5; }
+
+/* 정산표 스타일 */
+.nav-tabs .nav-link { color: #555; font-weight: 600; }
+.nav-tabs .nav-link.active { color: var(--primary-color); font-weight: 800; }
+.full-table-container { max-height: 600px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 0 0 8px 8px; }
+.table-rate thead th { position: sticky; top: 0; background-color: #343a40; color: white; z-index: 1; text-align: center; font-size: 0.9rem; padding: 12px 0; }
+.table-rate tbody td { text-align: center; font-size: 0.9rem; vertical-align: middle; padding: 8px 0; border-bottom: 1px solid #eee; }
+.table-rate tbody tr:nth-child(even) { background-color: #f8f9fa; }
+
+/* 결과 박스 */
+.result-box { background-color: #f8f9fa; border-radius: 15px; padding: 25px; border: 1px solid #e9ecef; }
+.cagr-badge { font-size: 0.85rem; margin-top: 8px; display: block; text-align: right; color: var(--dark-green); font-weight: bold; }
+
+/* 텍스트 콘텐츠 스타일 (가이드/FAQ) */
+.content-title { font-weight: 800; color: #333; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 15px; font-size: 1.8rem; }
+.text-content { line-height: 1.8; color: #444; font-size: 1rem; }
+.text-content h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark-green); margin-top: 40px; margin-bottom: 15px; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+.text-content h3 { font-size: 1.15rem; font-weight: 700; color: #555; margin-top: 25px; margin-bottom: 10px; }
+.text-content p { margin-bottom: 15px; text-align: justify; }
+.text-content ul, .text-content ol { margin-bottom: 20px; padding-left: 20px; }
+.text-content li { margin-bottom: 8px; }
+.info-box { background-color: #f1f3f5; padding: 20px; border-radius: 10px; border-left: 5px solid #adb5bd; margin: 20px 0; }
+.check-list-item { display: flex; align-items: flex-start; margin-bottom: 10px; }
+.check-list-item i { color: var(--primary-color); margin-right: 10px; margin-top: 5px; }
+
+footer { margin-top: auto; background-color: #343a40; color: #adb5bd; padding: 40px 0; font-size: 0.85rem; }
+footer a { color: #dee2e6; text-decoration: none; }
+footer a:hover { color: #fff; text-decoration: underline; }
