@@ -2,94 +2,26 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9QNZ3LHS9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-T9QNZ3LHS9');
-    </script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-T9QNZ3LHS9');</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- 1. SEO & Meta Tags (도메인 적용 완료) -->
-    <title>신혼희망타운 모기지 계산기 | 수익공유형 정산표 & 월 납입금 분석</title>
-    <meta name="description" content="신혼희망타운 수익공유형 모기지와 일반 주담대를 계산·비교하는 금융 정보 사이트입니다.">
-    <meta name="keywords" content="신혼희망타운, 수익공유형모기지, 신희타계산기, 모기지정산표, LH환수금, 신혼부부대출, 디딤돌대출비교, 주택담보대출계산기">
-    <meta name="author" content="Shinheeta Calc">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph (SNS 공유 정보) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="신혼희망타운 모기지 통합 계산기">
-    <meta property="og:description" content="내가 낼 수익공유금은 얼마? 신희타 vs 일반대출 완벽 비교 분석기.">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630/20c997/ffffff?text=Shinheeta+Calculator">
-    <!-- [중요] 실제 도메인으로 변경됨 -->
-    <meta property="og:url" content="https://신희타계산기.kr"> 
-    <link rel="canonical" href="https://신희타계산기.kr">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7715950782331375"
-     crossorigin="anonymous"></script>
-    <!-- Bootstrap 5 CSS & Icons -->
+    <title>신혼희망타운 모기지 계산기 | 수익공유형 정산표 & 월 납입금</title>
+    <meta name="description" content="신혼희망타운 수익공유형 모기지 전용 계산기입니다. 일반 주담대와 이자 및 최종 수익을 비교하고, LH 환수금을 자동으로 계산해보세요.">
+    <meta name="keywords" content="신혼희망타운, 수익공유형모기지, 신희타계산기, 모기지정산표">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <style>
-        :root { --primary-color: #20c997; --dark-green: #0ca678; }
-        body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif; padding-top: 60px; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        .navbar-custom { background: linear-gradient(135deg, #20c997 0%, #0ca678 100%); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .navbar-custom .nav-link { color: rgba(255,255,255,0.9) !important; font-weight: 600; font-size: 1rem; }
-        .navbar-custom .nav-link.active { color: #fff !important; font-weight: 800; border-bottom: 3px solid #fff; }
-
-        .main-header { text-align: center; padding: 30px 20px 20px 20px; }
-        .main-header h1 { font-size: 1.8rem; font-weight: 800; color: #333; margin-bottom: 5px; }
-        .main-header p { color: #666; font-size: 0.95rem; }
-
-        .page-section { display: none; max-width: 600px; margin: 0 auto 40px auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; animation: fadeIn 0.3s ease-in-out; }
-        .page-section.active { display: block; }
-        .calc-body { padding: 30px 25px; }
-
-        .guide-section { max-width: 800px; margin: 0 auto 40px auto; background: #fff; padding: 40px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .guide-title { font-weight: 800; color: #333; margin-bottom: 20px; border-left: 5px solid var(--primary-color); padding-left: 15px; font-size: 1.5rem; }
-        .guide-text { line-height: 1.7; color: #555; margin-bottom: 30px; font-size: 0.95rem; }
-        .guide-text h2 { font-size: 1.2rem; font-weight: 700; color: #0ca678; margin-top: 30px; margin-bottom: 15px; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .step-section { margin-bottom: 25px; border: 1px solid #eee; border-radius: 12px; padding: 20px; background-color: #fff; position: relative; }
-        .step-badge { position: absolute; top: -12px; left: 15px; background: #333; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .form-label { font-weight: 700; font-size: 0.95rem; color: #444; }
-        .input-group-text { background-color: #f8f9fa; }
-        .money-ko { font-size: 0.8rem; color: #20c997; font-weight: bold; margin-top: 5px; margin-left: 2px; }
-
-        .btn-check:checked + .btn-outline-custom { background-color: var(--primary-color); color: white; border-color: var(--primary-color); }
-        .btn-outline-custom { border: 1px solid #ced4da; color: #555; background-color: white; }
-        .btn-outline-custom:hover { background-color: #e6fcf5; }
-
-        .nav-tabs .nav-link { color: #555; font-weight: 600; border-radius: 10px 10px 0 0; }
-        .nav-tabs .nav-link.active { color: var(--primary-color); font-weight: 800; border-color: #dee2e6 #dee2e6 #fff; }
-        .full-table-container { max-height: 600px; overflow-y: auto; border: 1px solid #dee2e6; border-radius: 0 0 8px 8px; }
-        .table-rate thead th { position: sticky; top: 0; background-color: #343a40; color: white; z-index: 1; text-align: center; font-size: 0.9rem; padding: 12px 0; }
-        .table-rate tbody td { text-align: center; font-size: 0.9rem; vertical-align: middle; padding: 8px 0; border-bottom: 1px solid #eee; }
-        .table-rate tbody tr:nth-child(even) { background-color: #f8f9fa; }
-        
-        .result-box { background-color: #f8f9fa; border-radius: 15px; padding: 25px; border: 1px solid #e9ecef; }
-        .cagr-badge { font-size: 0.85rem; margin-top: 8px; display: block; text-align: right; color: var(--dark-green); font-weight: bold; }
-        
-        footer { margin-top: auto; background-color: #343a40; color: #adb5bd; padding: 40px 0; font-size: 0.85rem; }
-        footer a { color: #dee2e6; text-decoration: none; }
-        footer a:hover { color: #fff; text-decoration: underline; }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7715950782331375" crossorigin="anonymous"></script>
 </head>
 <body>
 
 <nav class="navbar navbar-expand navbar-dark navbar-custom fixed-top">
     <div class="container-fluid justify-content-center">
         <ul class="navbar-nav flex-row">
-            <li class="nav-item mx-3"><a class="nav-link active" href="#" onclick="switchTab('calc', this)"><i class="bi bi-calculator"></i> 계산기</a></li>
-            <li class="nav-item mx-3"><a class="nav-link" href="#" onclick="switchTab('table', this)"><i class="bi bi-table"></i> 정산표</a></li>
-            <li class="nav-item mx-3"><a class="nav-link" href="#guide-section"><i class="bi bi-book"></i> 가이드</a></li>
+            <li class="nav-item mx-3"><a class="nav-link active" href="index.html">계산기</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" href="table.html">정산표</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" href="guide.html">가이드</a></li>
+            <li class="nav-item mx-3"><a class="nav-link" href="faq.html">FAQ</a></li>
         </ul>
     </div>
 </nav>
@@ -99,509 +31,164 @@
     <p>수익공유 정산금과 일반 대출 이자 비교 분석</p>
 </header>
 
-<!-- PAGE 1: 모기지 계산기 -->
-<div id="page-calc" class="page-section active">
-    <div class="calc-body text-dark">
-        <div class="my-3 text-center">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7715950782331375"
-                 data-ad-slot="2160042283"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+<div class="page-container calc-container">
+    <div class="text-center mb-3">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7715950782331375" data-ad-slot="2160042283" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
-        <form id="calcForm" onsubmit="return false;">
-            
-            <!-- STEP 1 -->
-            <div class="step-section">
-                <span class="step-badge">STEP 1</span>
-                <div class="mb-3">
-                    <label class="form-label" for="purchasePrice">분양가 (입주금)</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control text-end fw-bold" id="purchasePrice" placeholder="0" onkeyup="inputNumberFormat(this)" required inputmode="numeric">
-                        <span class="input-group-text">만원</span>
-                    </div>
-                    <div id="text-purchasePrice" class="money-ko"></div>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                        <label class="form-label" for="kids">자녀 수</label>
-                        <select class="form-select" id="kids">
-                            <option value="0">0명</option>
-                            <option value="1">1명</option>
-                            <option value="2">2명 이상</option>
-                        </select>
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label" for="startDate">입주(대출) 시기</label>
-                        <input type="month" class="form-control" id="startDate" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- STEP 2: 대출 및 금리 -->
-            <div class="step-section">
-                <span class="step-badge">STEP 2</span>
-                
-                <label class="form-label" for="loanAmount">대출 금액 (LTV 선택)</label>
-                <div class="input-group mb-2">
-                    <input type="text" class="form-control text-end fw-bold" id="loanAmount" placeholder="금액 자동 입력" onkeyup="inputNumberFormat(this)" required inputmode="numeric">
+    <form id="calcForm" onsubmit="return false;">
+        <div class="step-section">
+            <span class="step-badge">STEP 1</span>
+            <div class="mb-3">
+                <label class="form-label" for="purchasePrice">분양가 (입주금)</label>
+                <div class="input-group">
+                    <input type="text" class="form-control text-end fw-bold" id="purchasePrice" placeholder="0" onkeyup="inputNumberFormat(this)" required inputmode="numeric">
                     <span class="input-group-text">만원</span>
                 </div>
-                <div id="text-loanAmount" class="money-ko mb-2"></div>
-
-                <!-- [수정] type="button" 추가 (폼 제출 방지) -->
-                <div class="btn-group w-100 mb-3" role="group">
-                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(70)">70%</button>
-                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(60)">60%</button>
-                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(50)">50%</button>
-                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(40)">40%</button>
-                    <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(30)">30%</button>
+                <div id="text-purchasePrice" class="money-ko"></div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" for="kids">자녀 수</label>
+                    <select class="form-select" id="kids">
+                        <option value="0">0명</option>
+                        <option value="1">1명</option>
+                        <option value="2">2명 이상</option>
+                    </select>
                 </div>
-                <div class="text-end mb-3">
-                    <span class="badge bg-light text-dark border" id="ltvDisplay">LTV: - %</span>
-                    <span class="badge bg-danger" id="limitWarning" style="display:none;">한도 4억 초과</span>
+                <div class="col-6">
+                    <label class="form-label" for="startDate">입주(대출) 시기</label>
+                    <input type="month" class="form-control" id="startDate" required>
                 </div>
+            </div>
+        </div>
 
-                <div class="row">
+        <div class="step-section">
+            <span class="step-badge">STEP 2</span>
+            <label class="form-label" for="loanAmount">대출 금액 (LTV 선택)</label>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control text-end fw-bold" id="loanAmount" placeholder="금액 자동 입력" onkeyup="inputNumberFormat(this)" required inputmode="numeric">
+                <span class="input-group-text">만원</span>
+            </div>
+            <div id="text-loanAmount" class="money-ko mb-2"></div>
+            <div class="btn-group w-100 mb-3" role="group">
+                <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(70)">70%</button>
+                <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(60)">60%</button>
+                <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(50)">50%</button>
+                <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(40)">40%</button>
+                <button type="button" class="btn btn-outline-custom btn-sm" onclick="setLTV(30)">30%</button>
+            </div>
+            <div class="text-end mb-3">
+                <span class="badge bg-light text-dark border" id="ltvDisplay">LTV: - %</span>
+                <span class="badge bg-danger" id="limitWarning" style="display:none;">한도 4억 초과</span>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="form-label" for="hopeRate">대출 금리</label>
+                    <div class="input-group input-group-sm mb-1">
+                        <input type="number" class="form-control" id="hopeRate" value="1.3" step="0.1">
+                        <span class="input-group-text">%</span>
+                    </div>
+                    <div class="btn-group w-100 btn-group-sm">
+                        <button type="button" class="btn btn-outline-secondary" onclick="setRate(1.3)">1.3%</button>
+                        <button type="button" class="btn btn-outline-secondary" onclick="setRate(1.6)">1.6%</button>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label class="form-label" for="termOptions">대출 만기</label>
+                    <select class="form-select" id="termOptions">
+                        <option value="30">30년 (1년거치)</option>
+                        <option value="20">20년 (1년거치)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="step-section border-primary border-opacity-25" style="background-color: #f8fffc;">
+            <span class="step-badge bg-primary">STEP 3</span>
+            <div class="mb-3">
+                <label class="form-label" for="endDate">예상 매도 시기</label>
+                <input type="month" class="form-control" id="endDate" onchange="calcDurationAndCAGR()" required>
+                <div class="text-end mt-1">
+                    <span class="badge bg-secondary" id="durationBadge">기간 미입력</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="sellPrice">예상 매도 가격</label>
+                <div class="input-group">
+                    <input type="text" class="form-control text-end fw-bold" id="sellPrice" placeholder="0" onkeyup="updateCAGR(this)" required inputmode="numeric">
+                    <span class="input-group-text">만원</span>
+                </div>
+                <div id="text-sellPrice" class="money-ko"></div>
+                <span id="cagrDisplay" class="cagr-badge"></span>
+            </div>
+        </div>
+
+        <div class="mb-4 px-2">
+            <label class="form-label text-muted small" for="normalRate"><i class="bi bi-bank"></i> 비교용 일반 주담대 금리</label>
+            <div class="input-group input-group-sm">
+                <input type="number" class="form-control" id="normalRate" value="4.5" step="0.1">
+                <span class="input-group-text">%</span>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success w-100 py-3 fw-bold shadow-sm fs-5" style="background-color:var(--primary-color); border:none;" onclick="calculate()">
+            결과 분석하기
+        </button>
+    </form>
+
+    <div id="resultBox" class="result-box mt-4" style="display:none;">
+        <h5 class="fw-bold text-center mb-3">📊 분석 결과</h5>
+        <div id="verdictBox" class="alert text-center fw-bold mb-3 small"></div>
+        <table class="table table-bordered bg-white small align-middle mb-3">
+            <thead class="table-light text-center">
+                <tr><th width="30%">항목</th><th width="35%">신희타</th><th width="35%">일반대출</th></tr>
+            </thead>
+            <tbody>
+                <tr><td class="bg-light text-center">시세차익</td><td colspan="2" class="text-center fw-bold text-primary">+<span id="resGain">0</span>만</td></tr>
+                <tr><td class="bg-light text-center">총 이자</td><td class="text-end text-danger">-<span id="resHopeInt">0</span>만</td><td class="text-end text-danger">-<span id="resNormInt">0</span>만</td></tr>
+                <tr><td class="bg-light text-center fw-bold text-danger">LH 환수금</td><td class="text-end text-danger fw-bold bg-warning bg-opacity-10">-<span id="resShare">0</span>만<br><span style="font-size:0.7em;">(환수율 <span id="resShareRate">0</span>%)</span></td><td class="text-center text-muted">-</td></tr>
+                <tr class="table-group-divider"><td class="bg-dark text-white text-center">최종수익</td><td class="text-end fw-bold text-success"><span id="resHopeProfit">0</span>만</td><td class="text-end fw-bold text-secondary"><span id="resNormProfit">0</span>만</td></tr>
+            </tbody>
+        </table>
+        <div class="card border-0 bg-light mb-3">
+            <div class="card-body p-3">
+                <h6 class="card-title fw-bold small mb-3 text-center"><i class="bi bi-wallet2"></i> 월 예상 납부액 비교</h6>
+                <div class="row g-2">
                     <div class="col-6">
-                        <label class="form-label" for="hopeRate">대출 금리</label>
-                        <div class="input-group input-group-sm mb-1">
-                            <input type="number" class="form-control" id="hopeRate" value="1.3" step="0.1">
-                            <span class="input-group-text">%</span>
-                        </div>
-                        <!-- [수정] type="button" 추가 -->
-                        <div class="btn-group w-100 btn-group-sm">
-                            <button type="button" class="btn btn-outline-secondary" onclick="setRate(1.3)">1.3%</button>
-                            <button type="button" class="btn btn-outline-secondary" onclick="setRate(1.6)">1.6%</button>
+                        <div class="p-2 bg-white rounded border text-center h-100">
+                            <div class="badge bg-success mb-2">신혼희망타운</div>
+                            <div class="small text-muted mb-1">초기 1년 (이자만)</div><div class="fw-bold mb-2"><span id="pmtInterestOnly">0</span>원</div>
+                            <div class="small text-muted mb-1">2년차~ (원리금)</div><div class="fw-bold text-success fs-5"><span id="pmtFull">0</span>원</div>
                         </div>
                     </div>
                     <div class="col-6">
-                        <label class="form-label" for="termOptions">대출 만기</label>
-                        <select class="form-select" id="termOptions">
-                            <option value="30">30년 (1년거치)</option>
-                            <option value="20">20년 (1년거치)</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 광고 영역 (중간) -->
-            <div class="my-4 text-center">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-7715950782331375"
-                     data-ad-slot="5056193586"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
-
-            <!-- STEP 3 -->
-            <div class="step-section border-primary border-opacity-25" style="background-color: #f8fffc;">
-                <span class="step-badge bg-primary">STEP 3</span>
-                <div class="mb-3">
-                    <label class="form-label" for="endDate">예상 매도 시기</label>
-                    <input type="month" class="form-control" id="endDate" onchange="calcDurationAndCAGR()" required>
-                    <div class="text-end mt-1">
-                        <span class="badge bg-secondary" id="durationBadge">기간 미입력</span>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="sellPrice">예상 매도 가격</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control text-end fw-bold" id="sellPrice" placeholder="0" onkeyup="updateCAGR(this)" required inputmode="numeric">
-                        <span class="input-group-text">만원</span>
-                    </div>
-                    <div id="text-sellPrice" class="money-ko"></div>
-                    <span id="cagrDisplay" class="cagr-badge"></span>
-                </div>
-            </div>
-
-            <div class="mb-4 px-2">
-                <label class="form-label text-muted small" for="normalRate"><i class="bi bi-bank"></i> 비교용 일반 주담대 금리</label>
-                <div class="input-group input-group-sm">
-                    <input type="number" class="form-control" id="normalRate" value="4.5" step="0.1">
-                    <span class="input-group-text">%</span>
-                </div>
-            </div>
-
-            <!-- [수정] type="button" 추가 -->
-            <button type="button" class="btn btn-success w-100 py-3 fw-bold shadow-sm fs-5" style="background-color:var(--primary-color); border:none;" onclick="calculate()">
-                결과 분석하기
-            </button>
-        </form>
-
-        <div id="resultBox" class="result-box mt-4" style="display:none;">
-            <h5 class="fw-bold text-center mb-3">📊 분석 결과</h5>
-            <div id="verdictBox" class="alert text-center fw-bold mb-3 small"></div>
-            <table class="table table-bordered bg-white small align-middle mb-3">
-                <thead class="table-light text-center">
-                    <tr><th width="30%">항목</th><th width="35%">신희타</th><th width="35%">일반대출</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td class="bg-light text-center">시세차익</td><td colspan="2" class="text-center fw-bold text-primary">+<span id="resGain">0</span>만</td></tr>
-                    <tr><td class="bg-light text-center">총 이자</td><td class="text-end text-danger">-<span id="resHopeInt">0</span>만</td><td class="text-end text-danger">-<span id="resNormInt">0</span>만</td></tr>
-                    <tr><td class="bg-light text-center fw-bold text-danger">LH 환수금</td><td class="text-end text-danger fw-bold bg-warning bg-opacity-10">-<span id="resShare">0</span>만<br><span style="font-size:0.7em;">(환수율 <span id="resShareRate">0</span>%)</span></td><td class="text-center text-muted">-</td></tr>
-                    <tr class="table-group-divider"><td class="bg-dark text-white text-center">최종수익</td><td class="text-end fw-bold text-success"><span id="resHopeProfit">0</span>만</td><td class="text-end fw-bold text-secondary"><span id="resNormProfit">0</span>만</td></tr>
-                </tbody>
-            </table>
-            <div class="card border-0 bg-light mb-3">
-                <div class="card-body p-3">
-                    <h6 class="card-title fw-bold small mb-3 text-center"><i class="bi bi-wallet2"></i> 월 예상 납부액 비교</h6>
-                    <div class="row g-2">
-                        <div class="col-6">
-                            <div class="p-2 bg-white rounded border text-center h-100">
-                                <div class="badge bg-success mb-2">신혼희망타운</div>
-                                <div class="small text-muted mb-1">초기 1년 (이자만)</div><div class="fw-bold mb-2"><span id="pmtInterestOnly">0</span>원</div>
-                                <div class="small text-muted mb-1">2년차~ (원리금)</div><div class="fw-bold text-success fs-5"><span id="pmtFull">0</span>원</div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="p-2 bg-white rounded border text-center h-100">
-                                <div class="badge bg-secondary mb-2">일반 주담대</div>
-                                <div class="small text-muted mb-1">매월 (원리금)</div><div class="fw-bold text-secondary fs-5 mt-4"><span id="normPmtFull">0</span>원</div>
-                                <div class="mt-2 text-danger" style="font-size: 0.7rem;">(월 +<span id="diffPmt">0</span>원 더 냄)</div>
-                            </div>
+                        <div class="p-2 bg-white rounded border text-center h-100">
+                            <div class="badge bg-secondary mb-2">일반 주담대</div>
+                            <div class="small text-muted mb-1">매월 (원리금)</div><div class="fw-bold text-secondary fs-5 mt-4"><span id="normPmtFull">0</span>원</div>
+                            <div class="mt-2 text-danger" style="font-size: 0.7rem;">(월 +<span id="diffPmt">0</span>원 더 냄)</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- 광고 영역 (결과 하단) -->
-            <div class="mt-3 text-center">
-                <ins class="adsbygoogle"
-                     style="display:block"
-                     data-ad-client="ca-pub-7715950782331375"
-                     data-ad-slot="4269547918"
-                     data-ad-format="auto"
-                     data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
-            </div>
+        </div>
+        
+        <div class="mt-4 text-center">
+            <a href="table.html" class="btn btn-outline-dark btn-sm me-2">📜 정산표 전체보기</a>
+            <a href="guide.html" class="btn btn-outline-primary btn-sm">📖 상세 가이드</a>
         </div>
     </div>
 </div>
-
-<!-- PAGE 2: 정산표 -->
-<div id="page-table" class="page-section">
-    <div class="calc-body text-dark">
-        <h4 class="fw-bold text-center mb-4">📜 수익공유 모기지 정산표</h4>
-        <!-- 광고 영역 (정산표) -->
-        <div class="mb-3 text-center">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-7715950782331375"
-                 data-ad-slot="1116948577"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <ul class="nav nav-tabs mb-0 justify-content-center" id="tableTabs" role="tablist">
-            <li class="nav-item"><button class="nav-link active" id="tab-btn-70" data-bs-toggle="tab" data-bs-target="#content-70" type="button">70%</button></li>
-            <li class="nav-item"><button class="nav-link" id="tab-btn-60" data-bs-toggle="tab" data-bs-target="#content-60" type="button">60%</button></li>
-            <li class="nav-item"><button class="nav-link" id="tab-btn-50" data-bs-toggle="tab" data-bs-target="#content-50" type="button">50%</button></li>
-            <li class="nav-item"><button class="nav-link" id="tab-btn-40" data-bs-toggle="tab" data-bs-target="#content-40" type="button">40%</button></li>
-            <li class="nav-item"><button class="nav-link" id="tab-btn-30" data-bs-toggle="tab" data-bs-target="#content-30" type="button">30%</button></li>
-        </ul>
-        <div class="tab-content" id="tableTabContent">
-            <div class="tab-pane fade show active" id="content-70"></div>
-            <div class="tab-pane fade" id="content-60"></div>
-            <div class="tab-pane fade" id="content-50"></div>
-            <div class="tab-pane fade" id="content-40"></div>
-            <div class="tab-pane fade" id="content-30"></div>
-        </div>
-        <p class="text-center text-muted small mt-3">※ 보유기간 1~9년차는 고정비율, 10년차부터 매년 2%p씩 차감.</p>
-    </div>
-</div>
-
-<section id="guide-section" class="guide-section">
-    <h3 class="guide-title">📖 신혼희망타운 수익공유형 모기지 완벽 가이드</h3>
-    <div class="guide-text">
-        <h2>1. 신혼희망타운 수익공유형 모기지란?</h2>
-        <p>신혼희망타운 전용 수익공유형 모기지는 신혼부부의 주거비 부담을 줄이기 위해 연 1.3%(고정금리)의 초저금리로 집값의 최대 70%까지 대출해주는 정책 상품입니다. 혜택이 큰 만큼, 향후 주택을 매도하거나 대출을 상환할 때 발생한 **시세차익의 일부를 기금(LH)과 공유**해야 합니다.</p>
-        <h2>2. 수익공유(환수) 비율은?</h2>
-        <p>수익공유 비율은 **LTV(대출비율)**, **자녀 수**, **대출 기간**에 따라 달라집니다. LTV가 높고 자녀가 적을수록 공유 비율이 높습니다. 하지만 자녀를 출산하거나 거주 기간이 길어질수록 환수율은 점차 감소합니다. (LTV 70% 시 최대 50% 공유)</p>
-        <h2>3. 신희타 vs 일반 주담대 비교 포인트</h2>
-        <p>많은 분들이 시세차익 공유를 부담스러워하지만, 1.3%의 고정금리는 현재의 고금리 상황에서 강력한 혜택입니다. 본 계산기를 통해 [이자 절감액]과 [공유 수익]을 비교하여 실질적인 유불리를 따져보세요.</p>
-        <div class="alert alert-light border mt-3 small">
-            <strong>참고:</strong> 본 도구는 최신 LH 입주자 모집 공고문을 기반으로 제작되었습니다.
-        </div>
-    </div>
-</section>
 
 <footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <h5 class="fw-bold text-white mb-2">신희타 계산기</h5>
-                <p class="text-muted small">예비 신혼부부의 내 집 마련을 응원합니다.</p>
-            </div>
-            <div class="col-md-6 text-md-end">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">이용약관</a></li>
-                    <li class="list-inline-item border-start border-secondary ps-2"><a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">개인정보처리방침</a></li>
-                    <li class="list-inline-item border-start border-secondary ps-2"><a href="#" data-bs-toggle="modal" data-bs-target="#disclaimerModal">책임한계 및 법적고지</a></li>
-                    <!-- [수정] 실제 사용자 이메일 적용 (여기에 본인 이메일 입력 필수) -->
-                    <li class="list-inline-item border-start border-secondary ps-2"><a href="mailto:shinta.calc@gmail.com" class="text-white">문의하기 (Contact)</a></li>
-                </ul>
-                <p class="small text-muted">© 2024 Shinheeta Calculator. All rights reserved.</p>
-                <div class="small text-muted mt-2">
-                    <a href="#" onclick="switchTab('calc')">계산기</a> | <a href="#" onclick="switchTab('table')">정산표</a> | <a href="#guide-section">이용가이드</a>
-                </div>
-            </div>
-        </div>
+    <div class="container text-center">
+        <p class="small text-muted">© 2024 Shinheeta Calculator. All rights reserved.</p>
+        <p class="small text-muted"><a href="mailto:shinta.calc@gmail.com">Contact</a> | <a href="guide.html">Terms</a></p>
     </div>
 </footer>
 
-<!-- 모달 영역 (법적 고지) -->
-<div class="modal fade" id="disclaimerModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header"><h5 class="modal-title fw-bold">책임한계 및 법적고지</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body small text-secondary">
-                <p>1. 본 서비스의 계산 결과는 시뮬레이션 값이며 법적 효력이 없습니다.</p>
-                <p>2. 실제 대출 실행 시점의 정책, 금리, LH 기준에 따라 결과가 달라질 수 있습니다.</p>
-                <p>3. 운영자는 본 서비스 이용으로 인한 손해에 대해 책임을 지지 않습니다.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- [수정] 개인정보처리방침 (문의 이메일 추가) -->
-<div class="modal fade" id="privacyModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header"><h5 class="modal-title fw-bold">개인정보처리방침</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body small text-secondary">
-                <h6>1. 개인정보 수집 및 이용</h6>
-                <p>본 사이트는 회원가입을 받지 않으며, 입력하신 금융 정보는 서버에 저장되지 않고 브라우저 내에서만 연산됩니다.</p>
-                <hr>
-                <h6>2. 쿠키 및 광고 (Google AdSense)</h6>
-                <p>구글 애드센스 광고 게재를 위해 쿠키(Cookie)를 사용할 수 있습니다. 사용자는 브라우저 설정에서 쿠키를 거부할 수 있습니다.</p>
-                <hr>
-                <!-- [추가] 개인정보 책임자 연락처 -->
-                <h6>3. 개인정보 관련 문의</h6>
-                <p>개인정보 처리와 관련된 문의사항은 아래 이메일로 연락 주시기 바랍니다.</p>
-                <p><strong>이메일:</strong> shinta.calc@gmail.com</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="termsModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header"><h5 class="modal-title fw-bold">이용약관</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-            <div class="modal-body small text-secondary">
-                <p>본 사이트는 무료로 제공되며, 본 약관에 동의한 것으로 간주합니다. 콘텐츠의 무단 복제 및 상업적 이용을 금지합니다.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function switchTab(pageId, navElement) {
-        document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
-        if(pageId === 'calc' || pageId === 'table') document.getElementById('page-' + pageId).classList.add('active');
-        document.querySelectorAll('.navbar-nav .nav-link').forEach(el => el.classList.remove('active'));
-        if(navElement) navElement.classList.add('active');
-        else if (pageId === 'calc') document.querySelector('.navbar-nav .nav-link:first-child').classList.add('active');
-        else if (pageId === 'table') document.querySelector('.navbar-nav .nav-link:nth-child(2)').classList.add('active');
-        window.scrollTo(0, 0);
-    }
-    window.onload = function() { document.getElementById('startDate').value = new Date().toISOString().slice(0, 7); generateAllTables(); }
-    function inputNumberFormat(obj) { obj.value = comma(uncomma(obj.value)); updateCAGR(); checkInputs(); }
-    function comma(str) { return String(str).replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'); }
-    function uncomma(str) { return String(str).replace(/[^\d]+/g, ''); }
-    function getNum(id) { return parseFloat(uncomma(document.getElementById(id).value)) || 0; }
-    function setNum(id, val) { document.getElementById(id).value = comma(Math.round(val)); }
-    function setRate(rate) { document.getElementById('hopeRate').value = rate; }
-    function setLTV(percent) {
-        const price = getNum('purchasePrice');
-        if (price === 0) { alert("분양가를 먼저 입력해주세요"); return; }
-        let loan = price * (percent / 100);
-        if (loan > 40000) loan = 40000;
-        setNum('loanAmount', loan);
-        checkInputs();
-    }
-    function koreanMoney(val) {
-        if (!val || val == 0) return "";
-        const eok = Math.floor(val / 10000);
-        const man = val % 10000;
-        let str = "";
-        if (eok > 0) str += `${eok}억 `;
-        if (man > 0) str += `${comma(man)}만원`;
-        return "(" + str.trim() + ")";
-    }
-    function checkInputs() {
-        const price = getNum('purchasePrice');
-        const loan = getNum('loanAmount');
-        const ltvBox = document.getElementById('ltvDisplay');
-        const limitMsg = document.getElementById('limitWarning');
-        document.getElementById('text-purchasePrice').innerText = koreanMoney(price);
-        document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
-        if (price > 0 && loan > 0) {
-            const ltv = (loan / price) * 100;
-            ltvBox.innerText = `LTV: ${ltv.toFixed(1)}%`;
-            if (loan > 40000) limitMsg.style.display = 'inline-block'; else limitMsg.style.display = 'none';
-        }
-    }
-    function calcDurationAndCAGR() {
-        const startStr = document.getElementById('startDate').value;
-        const endStr = document.getElementById('endDate').value;
-        const badge = document.getElementById('durationBadge');
-        if(!startStr || !endStr) return 0;
-        const start = new Date(startStr + "-01");
-        const end = new Date(endStr + "-01");
-        let months = (end.getFullYear() - start.getFullYear()) * 12;
-        months -= start.getMonth();
-        months += end.getMonth();
-        if (months <= 0) { badge.innerText = "날짜 오류"; badge.className = "badge bg-danger"; updateCAGR(); return -1; }
-        const years = Math.floor(months / 12);
-        const remain = months % 12;
-        badge.innerText = `${years}년 ${remain}개월`;
-        badge.className = "badge bg-success";
-        updateCAGR();
-        return months / 12; 
-    }
-    function updateCAGR(obj) {
-        if(obj) inputNumberFormat(obj);
-        const buy = getNum('purchasePrice');
-        const sell = getNum('sellPrice');
-        document.getElementById('text-sellPrice').innerText = koreanMoney(sell);
-        const startStr = document.getElementById('startDate').value;
-        const endStr = document.getElementById('endDate').value;
-        if(!startStr || !endStr) return;
-        const start = new Date(startStr + "-01");
-        const end = new Date(endStr + "-01");
-        let months = (end.getFullYear() - start.getFullYear()) * 12;
-        months -= start.getMonth();
-        months += end.getMonth();
-        const years = months / 12;
-        const display = document.getElementById('cagrDisplay');
-        if (buy > 0 && sell > 0 && years >= 1) {
-            const cagr = (Math.pow(sell / buy, 1 / years) - 1) * 100;
-            display.innerText = `🏠 연평균 상승률: ${cagr.toFixed(2)}%`;
-        } else { display.innerText = ""; }
-    }
-    function generateAllTables() {
-        const configs = [
-            { id: 'content-70', ltv: 70, start: [50, 40, 30], min: [20, 15, 10] },
-            { id: 'content-60', ltv: 60, start: [45, 35, 25], min: [10, 10, 10] },
-            { id: 'content-50', ltv: 50, start: [40, 30, 20], min: [10, 10, 10] },
-            { id: 'content-40', ltv: 40, start: [35, 25, 15], min: [10, 10, 10] },
-            { id: 'content-30', ltv: 30, start: [30, 20, 10], min: [10, 10, 10] }
-        ];
-        configs.forEach(cfg => {
-            let html = `<div class="full-table-container"><table class="table table-rate mb-0"><thead><tr><th>보유기간</th><th>0자녀</th><th>1자녀</th><th>2자녀+</th></tr></thead><tbody>`;
-            for(let yr = 1; yr <= 30; yr++) {
-                let reduce = (yr < 10) ? 0 : (yr - 9) * 2;
-                let r0 = Math.max(cfg.min[0], cfg.start[0] - reduce);
-                let r1 = Math.max(cfg.min[1], cfg.start[1] - reduce);
-                let r2 = Math.max(cfg.min[2], cfg.start[2] - reduce);
-                html += `<tr><td><strong>${yr}년</strong></td><td class="${r0===cfg.min[0]?'text-primary fw-bold':''}">${r0}%</td><td class="${r1===cfg.min[1]?'text-primary fw-bold':''}">${r1}%</td><td class="${r2===cfg.min[2]?'text-primary fw-bold':''}">${r2}%</td></tr>`;
-            }
-            html += `</tbody></table></div>`;
-            document.getElementById(cfg.id).innerHTML = html;
-        });
-    }
-    function calculate() {
-        try {
-            const price = getNum('purchasePrice');
-            const loan = getNum('loanAmount');
-            const sell = getNum('sellPrice');
-            const kids = parseInt(document.getElementById('kids').value);
-            const term = parseInt(document.getElementById('termOptions').value);
-            const hopeRate = parseFloat(document.getElementById('hopeRate').value);
-            const normRate = parseFloat(document.getElementById('normalRate').value);
-            const startStr = document.getElementById('startDate').value;
-            const endStr = document.getElementById('endDate').value;
-            if(!startStr || !endStr) { alert("입주 및 매도 기간을 입력해주세요."); return; }
-            const start = new Date(startStr + "-01");
-            const end = new Date(endStr + "-01");
-            let months = (end.getFullYear() - start.getFullYear()) * 12;
-            months -= start.getMonth();
-            months += end.getMonth();
-            const durationYears = months / 12;
-            if (price === 0 || loan === 0 || sell === 0) { alert("모든 금액을 0원 이상 입력해주세요."); return; }
-            if (durationYears <= 0) { alert("매도 시기는 입주 시기보다 미래여야 합니다."); return; }
-            const gain = sell - price;
-            const ltv = (loan / price) * 100;
-            let shareRate = 0;
-            if (gain > 0 && ltv >= 30) {
-                let bucket = Math.ceil(ltv / 10) * 10;
-                if(bucket < 30) bucket = 30; if(bucket > 70) bucket = 70;
-                const baseRates = { 70: [50, 40, 30], 60: [45, 35, 25], 50: [40, 30, 20], 40: [35, 25, 15], 30: [30, 20, 10] };
-                let startRate = baseRates[bucket][kids];
-                let reduction = Math.max(0, Math.floor(durationYears) - 9) * 2;
-                let calcRate = startRate - reduction;
-                let minLimit = 10;
-                if (bucket === 70) { if (kids === 0) minLimit = 20; else if (kids === 1) minLimit = 15; }
-                shareRate = Math.max(calcRate, minLimit);
-            }
-            const shareAmount = (gain > 0) ? gain * (shareRate / 100) : 0;
-            const hopeResult = calcLoanDetails(loan, hopeRate/100, term, durationYears, 1);
-            const normResult = calcLoanDetails(loan, normRate/100, 30, durationYears, 0);
-            const hopeProfit = gain - shareAmount - hopeResult.totalInterest;
-            const normProfit = gain - normResult.totalInterest;
-            document.getElementById('resGain').innerText = comma(gain);
-            document.getElementById('resHopeInt').innerText = comma(Math.round(hopeResult.totalInterest));
-            document.getElementById('resNormInt').innerText = comma(Math.round(normResult.totalInterest));
-            document.getElementById('resShare').innerText = comma(Math.round(shareAmount));
-            document.getElementById('resShareRate').innerText = shareRate;
-            document.getElementById('resHopeProfit').innerText = comma(Math.round(hopeProfit));
-            document.getElementById('resNormProfit').innerText = comma(Math.round(normProfit));
-            const hopeMonthly = Math.round(hopeResult.monthlyFull * 10000);
-            const hopeInterestOnly = Math.round(hopeResult.monthlyInterestOnly * 10000);
-            const normMonthly = Math.round(normResult.monthlyFull * 10000);
-            const diffMonthly = normMonthly - hopeMonthly;
-            document.getElementById('pmtInterestOnly').innerText = comma(hopeInterestOnly);
-            document.getElementById('pmtFull').innerText = comma(hopeMonthly);
-            document.getElementById('normPmtFull').innerText = comma(normMonthly);
-            document.getElementById('diffPmt').innerText = comma(diffMonthly);
-            const diff = hopeProfit - normProfit;
-            const vBox = document.getElementById('verdictBox');
-            if (diff > 0) { vBox.className = "alert alert-success text-center fw-bold mb-3"; vBox.innerHTML = `신희타가 총 ${comma(Math.round(diff))}만원 더 유리합니다! 🎉`; } 
-            else if (diff < 0) { vBox.className = "alert alert-danger text-center fw-bold mb-3"; vBox.innerHTML = `일반대출이 총 ${comma(Math.round(Math.abs(diff)))}만원 더 유리합니다.`; } 
-            else { vBox.className = "alert alert-secondary text-center fw-bold mb-3"; vBox.innerText = "수익이 동일합니다."; }
-            document.getElementById('resultBox').style.display = 'block';
-            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
-        } catch (e) { console.error(e); alert("오류가 발생했습니다."); }
-    }
-    function calcLoanDetails(principal, annualRate, totalYears, holdYears, graceYears) {
-        if(principal <= 0) return { totalInterest:0, monthlyInterestOnly:0, monthlyFull:0 };
-        const monthlyRate = annualRate / 12;
-        const totalMonths = totalYears * 12;
-        const graceMonths = graceYears * 12;
-        const holdMonths = Math.floor(holdYears * 12);
-        const monthlyInterestOnly = principal * monthlyRate;
-        const repayMonths = totalMonths - graceMonths;
-        let monthlyFull = 0;
-        if (repayMonths > 0) monthlyFull = principal * (monthlyRate * Math.pow(1+monthlyRate, repayMonths)) / (Math.pow(1+monthlyRate, repayMonths) - 1);
-        let totalInterestPaid = 0;
-        let balance = principal;
-        for(let m=1; m <= holdMonths; m++) {
-            if (m <= graceMonths) totalInterestPaid += balance * monthlyRate;
-            else {
-                const interest = balance * monthlyRate;
-                const principalRepay = monthlyFull - interest;
-                totalInterestPaid += interest;
-                balance -= principalRepay;
-                if(balance <= 0) break;
-            }
-        }
-        return { totalInterest: totalInterestPaid, monthlyInterestOnly: monthlyInterestOnly, monthlyFull: monthlyFull };
-    }
-</script>
+<script src="script.js"></script>
 </body>
 </html>
