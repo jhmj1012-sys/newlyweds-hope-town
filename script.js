@@ -2,7 +2,8 @@ window.onload = function() {
     // 날짜 기본값 설정 (계산기 페이지가 아닐 경우 에러 방지)
     const startDateInput = document.getElementById('startDate');
     if (startDateInput) {
-        startDateInput.value = new Date().toISOString().slice(0, 7);
+        const now = new Date();
+        startDateInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     }
     
     // 정산표 페이지일 경우 테이블 생성
@@ -46,14 +47,12 @@ function koreanMoney(val) {
 function checkInputs() {
     const price = getNum('purchasePrice');
     const loan = getNum('loanAmount');
-    if (price > 0 && loan > 0) {
-        const ltv = (loan / price) * 100;
-        document.getElementById('text-purchasePrice').innerText = koreanMoney(price);
-        document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
-        document.getElementById('ltvDisplay').innerText = `LTV: ${ltv.toFixed(1)}%`;
-        const limitMsg = document.getElementById('limitWarning');
-        if (loan > 40000) limitMsg.style.display = 'inline-block'; else limitMsg.style.display = 'none';
-    }
+    const priceText = document.getElementById('text-purchasePrice');
+    if (!priceText) return;
+    priceText.innerText = koreanMoney(price);
+    document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
+    document.getElementById('ltvDisplay').innerText = (price > 0 && loan > 0) ? `LTV: ${((loan / price) * 100).toFixed(1)}%` : 'LTV: - %';
+    document.getElementById('limitWarning').style.display = (loan > 40000) ? 'inline-block' : 'none';
 }
 
 function calcDurationAndCAGR() {
@@ -96,24 +95,39 @@ function updateCAGR(obj) {
     } else { display.innerText = ""; }
 }
 
+// 정산 비율: 수탁은행 상품설명서 별표1(신혼희망타운 공유형 모기지 정산표, 2025.09 개정) 기준
+const SHARE_BASE = { 70: [50, 40, 30], 60: [45, 35, 25], 50: [40, 30, 20], 40: [35, 25, 15], 30: [30, 20, 10] };
+const SHARE_FLOOR = [20, 15, 10]; // 자녀 0명 / 1명 / 2명 이상, 모든 담보인정비율 공통
+
+// 대출기간 1~9년은 기본 비율, 10년차부터 매년 2%p 인하.
+// 최저 비율보다 1%p만 높게 남는 칸은 최저 비율로 적용됨(예: 11% → 10%, 16% → 15%, 21% → 20%).
+function tableShareRate(ltvStep, kids, years) {
+    const floor = SHARE_FLOOR[kids];
+    const rate = SHARE_BASE[ltvStep][kids] - Math.max(0, years - 9) * 2;
+    return rate < floor + 2 ? floor : rate;
+}
+
+// 담보인정비율이 10% 단위가 아니면(4억 한도 적용 시) 앞뒤 구간 정산 비율을 선형 보간
+function shareRateFor(ltvPercent, kids, years) {
+    const ltv = Math.min(70, Math.max(30, ltvPercent));
+    const lo = Math.floor(ltv / 10) * 10;
+    if (lo === ltv) return tableShareRate(ltv, kids, years);
+    const rLo = tableShareRate(lo, kids, years);
+    const rHi = tableShareRate(lo + 10, kids, years);
+    return rLo + (rHi - rLo) * (ltv - lo) / 10;
+}
+
 function generateAllTables() {
-    const configs = [
-        { id: 'content-70', start: [50, 40, 30], min: [20, 15, 10] },
-        { id: 'content-60', start: [45, 35, 25], min: [10, 10, 10] },
-        { id: 'content-50', start: [40, 30, 20], min: [10, 10, 10] },
-        { id: 'content-40', start: [35, 25, 15], min: [10, 10, 10] },
-        { id: 'content-30', start: [30, 20, 10], min: [10, 10, 10] }
-    ];
-    configs.forEach(cfg => {
-        const el = document.getElementById(cfg.id);
+    [70, 60, 50, 40, 30].forEach(step => {
+        const el = document.getElementById(`content-${step}`);
         if(!el) return;
-        let html = `<div class="full-table-container"><table class="table table-rate mb-0"><thead><tr><th>보유기간</th><th>0자녀</th><th>1자녀</th><th>2자녀+</th></tr></thead><tbody>`;
-        for(let yr = 1; yr <= 30; yr++) {
-            let reduce = (yr < 10) ? 0 : (yr - 9) * 2;
-            let r0 = Math.max(cfg.min[0], cfg.start[0] - reduce);
-            let r1 = Math.max(cfg.min[1], cfg.start[1] - reduce);
-            let r2 = Math.max(cfg.min[2], cfg.start[2] - reduce);
-            html += `<tr><td><strong>${yr}년</strong></td><td class="${r0===cfg.min[0]?'text-primary fw-bold':''}">${r0}%</td><td class="${r1===cfg.min[1]?'text-primary fw-bold':''}">${r1}%</td><td class="${r2===cfg.min[2]?'text-primary fw-bold':''}">${r2}%</td></tr>`;
+        let html = `<div class="full-table-container"><table class="table table-rate mb-0"><thead><tr><th>대출기간</th><th>0자녀</th><th>1자녀</th><th>2자녀+</th></tr></thead><tbody>`;
+        for(let yr = 9; yr <= 30; yr++) {
+            const cells = [0, 1, 2].map(kids => {
+                const r = tableShareRate(step, kids, yr);
+                return `<td class="${r===SHARE_FLOOR[kids]?'text-primary fw-bold':''}">${r}%</td>`;
+            }).join('');
+            html += `<tr><td><strong>${yr === 9 ? '1~9년' : yr + '년'}</strong></td>${cells}</tr>`;
         }
         html += `</tbody></table></div>`;
         el.innerHTML = html;
@@ -136,20 +150,10 @@ function calculate() {
         if (durationYears <= 0) { alert("매도 시기는 입주 시기보다 미래여야 합니다."); return; }
 
         const gain = sell - price;
-        const ltv = (loan / price) * 100;
-        let shareRate = 0;
-        
-        if (gain > 0 && ltv >= 30) {
-            let bucket = Math.ceil(ltv / 10) * 10;
-            if(bucket < 30) bucket = 30; if(bucket > 70) bucket = 70;
-            const baseRates = { 70: [50, 40, 30], 60: [45, 35, 25], 50: [40, 30, 20], 40: [35, 25, 15], 30: [30, 20, 10] };
-            let startRate = baseRates[bucket][kids];
-            let reduction = Math.max(0, Math.floor(durationYears) - 9) * 2;
-            let calcRate = startRate - reduction;
-            let minLimit = 10;
-            if (bucket === 70) { if (kids === 0) minLimit = 20; else if (kids === 1) minLimit = 15; }
-            shareRate = Math.max(calcRate, minLimit);
-        }
+        // 담보인정비율 = 대출금액 ÷ 분양가 × 100, 소수점 이하 절사 (부동소수 오차 보정)
+        const ltvPercent = Math.floor(loan * 100 / price + 1e-9);
+        // 손실이 발생한 경우에는 정산하지 않음(기금이 손실을 나눠 부담하지도 않음)
+        const shareRate = (gain > 0) ? shareRateFor(ltvPercent, kids, Math.floor(durationYears)) : 0;
 
         const shareAmount = (gain > 0) ? gain * (shareRate / 100) : 0;
         const hopeResult = calcLoanDetails(loan, hopeRate/100, term, durationYears, 1);
@@ -162,7 +166,7 @@ function calculate() {
         document.getElementById('resHopeInt').innerText = comma(Math.round(hopeResult.totalInterest));
         document.getElementById('resNormInt').innerText = comma(Math.round(normResult.totalInterest));
         document.getElementById('resShare').innerText = comma(Math.round(shareAmount));
-        document.getElementById('resShareRate').innerText = shareRate;
+        document.getElementById('resShareRate').innerText = Number(shareRate.toFixed(1));
         document.getElementById('resHopeProfit').innerText = comma(Math.round(hopeProfit));
         document.getElementById('resNormProfit').innerText = comma(Math.round(normProfit));
 
@@ -174,7 +178,10 @@ function calculate() {
         document.getElementById('pmtInterestOnly').innerText = comma(hopeInterestOnly);
         document.getElementById('pmtFull').innerText = comma(hopeMonthly);
         document.getElementById('normPmtFull').innerText = comma(normMonthly);
-        document.getElementById('diffPmt').innerText = comma(diffMonthly);
+        const diffNote = document.getElementById('diffPmtNote');
+        if (diffMonthly > 0) { diffNote.className = 'mt-2 text-danger'; diffNote.innerText = `(월 ${comma(diffMonthly)}원 더 냄)`; }
+        else if (diffMonthly < 0) { diffNote.className = 'mt-2 text-success'; diffNote.innerText = `(월 ${comma(-diffMonthly)}원 덜 냄)`; }
+        else { diffNote.className = 'mt-2 text-muted'; diffNote.innerText = '(월 납부액 동일)'; }
 
         const diff = hopeProfit - normProfit;
         const vBox = document.getElementById('verdictBox');
