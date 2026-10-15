@@ -15,19 +15,28 @@
     <meta property="og:description" content="신혼희망타운 수익공유형 모기지 전용 계산기입니다. 일반 주담대와 이자 및 최종 수익을 비교하고, LH 환수금을 자동으로 계산해보세요.">
     <meta property="og:url" content="https://신희타계산기.kr/">
     <meta name="keywords" content="신혼희망타운, 수익공유형모기지, 신희타계산기, 모기지정산표">
+    <meta name="author" content="신희타 계산기 운영자">
+    <meta name="theme-color" content="#0ca678">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7715950782331375" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://신희타계산기.kr/#website","name":"신희타 계산기","alternateName":"신혼희망타운 모기지 계산기","url":"https://신희타계산기.kr/","inLanguage":"ko-KR","publisher":{"@type":"Organization","name":"신희타 계산기","url":"https://신희타계산기.kr/"}},{"@type":"WebApplication","name":"신혼희망타운 수익공유형 모기지 계산기","url":"https://신희타계산기.kr/","applicationCategory":"FinanceApplication","operatingSystem":"All","inLanguage":"ko-KR","description":"신혼희망타운 수익공유형 모기지 전용 계산기입니다. 일반 주담대와 이자 및 최종 수익을 비교하고, LH 환수금을 자동으로 계산해보세요.","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}]}
+    </script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand navbar-dark navbar-custom fixed-top">
+<nav class="navbar navbar-expand navbar-dark navbar-custom fixed-top" aria-label="주 메뉴">
     <div class="container-fluid justify-content-center">
+        <a class="navbar-brand fw-bold d-none d-xl-inline position-absolute start-0 ms-3" href="index.html">신희타 계산기</a>
         <ul class="navbar-nav flex-row">
-            <li class="nav-item mx-2"><a class="nav-link active" href="index.html">계산기</a></li>
+            <li class="nav-item mx-2"><a class="nav-link active" aria-current="page" href="index.html">계산기</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="table.html">정산표</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="guide.html">가이드</a></li>
+            <li class="nav-item mx-2"><a class="nav-link" href="articles.html">분석 글</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="faq.html">FAQ</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="qualify.html">자격요건</a></li>
             <li class="nav-item mx-2"><a class="nav-link" href="checklist.html">체크리스트</a></li>
@@ -154,7 +163,7 @@
             <tbody>
                 <tr><td class="bg-light text-center">시세차익</td><td colspan="2" class="text-center fw-bold text-primary">+<span id="resGain">0</span>만</td></tr>
                 <tr><td class="bg-light text-center">총 이자</td><td class="text-end text-danger">-<span id="resHopeInt">0</span>만</td><td class="text-end text-danger">-<span id="resNormInt">0</span>만</td></tr>
-                <tr><td class="bg-light text-center fw-bold text-danger">LH 환수금</td><td class="text-end text-danger fw-bold bg-warning bg-opacity-10">-<span id="resShare">0</span>만<br><span style="font-size:0.7em;">(환수율 <span id="resShareRate">0</span>%)</span></td><td class="text-center text-muted">-</td></tr>
+                <tr><td class="bg-light text-center fw-bold text-danger">정산금<br><span style="font-size:0.7em;" class="fw-normal">(기금 환수)</span></td><td class="text-end text-danger fw-bold bg-warning bg-opacity-10">-<span id="resShare">0</span>만<br><span style="font-size:0.7em;">(환수율 <span id="resShareRate">0</span>%)</span></td><td class="text-center text-muted">-</td></tr>
                 <tr class="table-group-divider"><td class="bg-dark text-white text-center">최종수익</td><td class="text-end fw-bold text-success"><span id="resHopeProfit">0</span>만</td><td class="text-end fw-bold text-secondary"><span id="resNormProfit">0</span>만</td></tr>
             </tbody>
         </table>
@@ -186,26 +195,117 @@
             <a href="breakeven.html" class="btn btn-outline-success btn-sm">📈 손익분기점 표</a>
         </div>
     </div>
+
+    <p class="small text-muted text-center mt-4 mb-0">계산 결과는 입력값과 <a href="about.html#basis">공개된 계산 기준</a>에 따른 모의 계산이며, 실제 대출 조건과 정산금은 수탁은행에서 확인하세요.</p>
+</div>
+
+<div class="page-container home-content">
+    <div class="text-content">
+        <h2 id="what">이 계산기로 알 수 있는 것</h2>
+        <p>신혼희망타운 전용 수익공유형 모기지는 연 1.6%(일부 단지 1.3%)의 낮은 고정금리로 돈을 빌려주는 대신, 집을 팔거나 대출을 모두 갚을 때 생긴 시세차익의 일부를 주택도시기금과 나누는 상품입니다. 금리가 낮다는 장점과 차익을 나눠야 한다는 단점이 동시에 있어서, <strong>"내 조건에서는 결국 어느 쪽이 얼마나 유리한가"</strong>는 직접 계산해 보기 전에는 알기 어렵습니다.</p>
+        <p>이 계산기는 같은 금액을 수익공유형 모기지로 빌렸을 때와 일반 주택담보대출로 빌렸을 때를 나란히 놓고, 매도 시점까지의 결과를 한 화면에 보여 줍니다.</p>
+        <div class="row g-3 mb-3">
+            <div class="col-md-4"><div class="feature-box"><i class="bi bi-percent"></i><strong>정산금과 정산 비율</strong><span>LTV·자녀 수·보유 기간에 따른 비율을 정산표 그대로 적용하고, 4억 한도에 걸리면 보간까지 계산합니다.</span></div></div>
+            <div class="col-md-4"><div class="feature-box"><i class="bi bi-cash-stack"></i><strong>보유 기간 이자 비교</strong><span>1년 거치 후 원리금균등분할상환으로 매도할 때까지 실제로 내는 이자를 두 대출 모두 계산합니다.</span></div></div>
+            <div class="col-md-4"><div class="feature-box"><i class="bi bi-calendar-check"></i><strong>월 납부액</strong><span>거치 기간의 이자만 내는 금액과 2년차부터의 원리금을 일반 주담대 상환액과 비교합니다.</span></div></div>
+        </div>
+
+        <h2 id="how">사용 방법</h2>
+        <h3>STEP 1. 분양가·자녀 수·입주 시기</h3>
+        <ul>
+            <li><strong>분양가</strong>는 발코니 확장 비용을 포함한 금액을 만원 단위로 넣습니다. 대출금과 정산 기준이 모두 이 금액에서 시작합니다.</li>
+            <li><strong>자녀 수</strong>는 지금이 아니라 <strong>매도할 때 예상되는 자녀 수</strong>를 넣으세요. 입주 후 태어난 자녀도 정산 때 인정됩니다.</li>
+            <li><strong>입주(대출) 시기</strong>는 대출이 실행되는 달입니다. 보유 기간과 정산 비율의 기준이 됩니다.</li>
+        </ul>
+        <h3>STEP 2. 대출 금액·금리·만기</h3>
+        <ul>
+            <li>LTV 버튼(30~70%)을 누르면 대출 금액이 자동으로 들어갑니다. 4억 원을 넘으면 4억 원으로 맞춰집니다.</li>
+            <li>금리는 기본 1.6%이며, 2023년 8월 30일 이전에 사전청약 또는 본청약 모집공고를 한 단지라면 1.3%를 고르세요.</li>
+            <li>만기 20년과 30년은 월 상환액만 바꾸고 정산 비율에는 영향을 주지 않습니다(<a href="term-20-vs-30.html">비교 글</a>).</li>
+        </ul>
+        <h3>STEP 3. 예상 매도 시기·가격, 비교 금리</h3>
+        <ul>
+            <li>매도 가격을 넣으면 <strong>연평균 상승률</strong>이 표시됩니다. 이 숫자가 지나치게 높거나 낮지 않은지 확인하면 현실적인 시나리오를 잡는 데 도움이 됩니다.</li>
+            <li>거주의무기간과 전매제한 기간이 끝난 뒤로 매도 시기를 잡아야 현실적입니다.</li>
+            <li>비교용 일반 주담대 금리는 결과를 가장 크게 흔드는 값입니다. 실제로 받을 수 있는 금리를 넣고 ±1%p로 한 번씩 더 계산해 보세요(<a href="compare-rate.html">비교 금리 고르는 법</a>).</li>
+        </ul>
+
+        <h2 id="example">계산 예시</h2>
+        <p>분양가 4억 5,000만 원 단지에 LTV 60%(대출 2억 7,000만 원), 연 1.6%·30년 만기로 입주해 자녀 1명과 10년을 살고 6억 원에 판다고 해 보겠습니다(연평균 상승률 약 2.9%). 비교용 일반 주담대 금리는 4.5%입니다.</p>
+        <div class="table-responsive">
+        <table class="table table-bordered table-sm text-center align-middle small">
+            <thead class="table-light"><tr><th>항목</th><th>수익공유형 모기지</th><th>일반 주담대</th></tr></thead>
+            <tbody>
+                <tr><td>시세차익</td><td colspan="2">1억 5,000만</td></tr>
+                <tr><td>10년간 낸 이자</td><td>3,827만</td><td>1억 1,041만</td></tr>
+                <tr><td>정산금</td><td>4,950만 (비율 33%)</td><td>-</td></tr>
+                <tr class="table-light fw-bold"><td>최종 수익</td><td class="text-success">6,223만</td><td>3,959만</td></tr>
+                <tr><td>월 납부액</td><td>1년차 36만 / 2년차~ 97만</td><td>136만 8천</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p>이 조건에서는 모기지가 <strong>2,264만 원 유리</strong>하고, 매달 내는 돈도 40만 원가량 적습니다. 그런데 같은 집이 7억 원(연평균 약 4.5%)에 팔린다면 정산금이 8,250만 원으로 커져 결과가 뒤집히고, 일반 주담대가 1,036만 원 유리해집니다. 반대로 5억 원(연 약 1.1%)에 그치면 모기지가 5,564만 원 유리합니다. 이처럼 <strong>예상 매도가에 따라 결론이 바뀌므로</strong>, 낙관·보통·비관 세 가지 가격으로 계산해 보는 것을 권합니다. 정산 비율 33%가 어떻게 나왔는지는 <a href="settlement-examples.html">정산금 계산 예시</a>에서 단계별로 확인할 수 있습니다.</p>
+
+        <h2 id="caution">결과를 볼 때 주의할 점</h2>
+        <ul>
+            <li>취득세·양도소득세 등 세금, 중개수수료, 감정평가 비용은 넣지 않았습니다. 두 대출에 똑같이 드는 비용이라 비교 결과에는 영향이 없지만, 실제로 손에 쥐는 금액은 더 적습니다.</li>
+            <li>이 대출은 대출 후 3년이 지나야 전액 조기상환할 수 있습니다(주택법령상 매각해야 하는 경우 제외). 3년 이내 매도 결과는 참고용으로만 보세요.</li>
+            <li>매도할 때 신고한 가격이 감정가보다 10% 이상 낮으면 감정가를 기준으로 정산합니다. 계산기는 입력한 매도가를 그대로 씁니다.</li>
+            <li>금리와 정산 기준은 단지별 입주자모집공고와 대출 약정에 따라 다를 수 있으니, 최종 결정 전에는 반드시 공고문과 수탁은행 안내를 확인하세요.</li>
+        </ul>
+
+        <h2 id="read">더 읽어 볼 글</h2>
+        <div class="row g-3 mb-2">
+            <div class="col-md-6"><a href="breakeven.html" class="article-card"><span class="article-tag">분석</span><strong>손익분기점: 집값이 연 몇 % 오르면 일반대출이 나을까</strong><span>보유 기간·자녀 수별 기준 상승률을 표로 정리했습니다.</span></a></div>
+            <div class="col-md-6"><a href="ltv-strategy.html" class="article-card"><span class="article-tag">분석</span><strong>LTV 30~70%, 얼마나 빌릴까</strong><span>10%p 더 빌리는 값은 시세차익의 5%입니다.</span></a></div>
+            <div class="col-md-6"><a href="settlement-examples.html" class="article-card"><span class="article-tag">기초</span><strong>정산금 계산 예시 7가지</strong><span>10년차 인하, 4억 한도, 최저 비율, 출산, 하락, 감정가까지.</span></a></div>
+            <div class="col-md-6"><a href="guide.html" class="article-card"><span class="article-tag">가이드</span><strong>신혼희망타운 모기지 완벽 가이드</strong><span>상품 구조부터 신청 절차까지 처음부터 정리했습니다.</span></a></div>
+        </div>
+        <p class="text-end small mb-0"><a href="articles.html">전체 글 보기 →</a></p>
+    </div>
 </div>
 
 <footer>
     <div class="container">
-        <div class="row">
-            <div class="col-md-5 mb-3 text-center text-md-start">
+        <div class="row gy-4">
+            <div class="col-lg-4 text-center text-lg-start">
                 <h5 class="fw-bold text-white mb-2">신희타 계산기</h5>
-                <p class="text-white-50 small mb-0">예비 신혼부부의 현명한 내 집 마련을 응원합니다.</p>
+                <p class="text-white-50 small mb-2">신혼희망타운 수익공유형 모기지의 이자와 정산금을 직접 계산하고 비교할 수 있도록 실제 입주자가 만든 정보 사이트입니다.</p>
+                <p class="small mb-0"><a href="mailto:shinta.calc@gmail.com" class="text-white-50 text-decoration-none"><i class="bi bi-envelope"></i> shinta.calc@gmail.com</a></p>
             </div>
-            <div class="col-md-7 text-center text-md-end">
-                <ul class="list-inline mb-2 footer-links">
-                    <li class="list-inline-item"><a href="about.html" class="text-white-50 text-decoration-none">운영자 소개</a></li>
-                    <li class="list-inline-item"><a href="terms.html" class="text-white-50 text-decoration-none">이용약관</a></li>
-                    <li class="list-inline-item"><a href="privacy.html" class="text-white text-decoration-none fw-bold">개인정보처리방침</a></li>
-                    <li class="list-inline-item"><a href="terms.html#disclaimer" class="text-white-50 text-decoration-none">책임한계 및 고지</a></li>
-                    <li class="list-inline-item"><a href="contact.html" class="text-white-50 text-decoration-none">문의하기</a></li>
+            <div class="col-6 col-lg-3">
+                <h6 class="footer-heading">계산·자료</h6>
+                <ul class="list-unstyled footer-list">
+                    <li><a href="index.html">모기지 계산기</a></li>
+                    <li><a href="table.html">정산표</a></li>
+                    <li><a href="settlement-examples.html">정산금 계산 예시</a></li>
+                    <li><a href="glossary.html">용어 사전</a></li>
+                    <li><a href="faq.html">자주 묻는 질문</a></li>
                 </ul>
-                <p class="small text-white-50 mb-0">© 2024–2026 신희타 계산기. All rights reserved.</p>
+            </div>
+            <div class="col-6 col-lg-3">
+                <h6 class="footer-heading">분석 글</h6>
+                <ul class="list-unstyled footer-list">
+                    <li><a href="breakeven.html">손익분기점</a></li>
+                    <li><a href="ltv-strategy.html">LTV 선택 전략</a></li>
+                    <li><a href="compare-rate.html">비교 금리 고르기</a></li>
+                    <li><a href="term-20-vs-30.html">만기 20년 vs 30년</a></li>
+                    <li><a href="articles.html">전체 글 보기</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-2">
+                <h6 class="footer-heading">사이트 정보</h6>
+                <ul class="list-unstyled footer-list footer-list-inline-sm">
+                    <li><a href="about.html">운영자 소개</a></li>
+                    <li><a href="contact.html">문의하기</a></li>
+                    <li><a href="privacy.html" class="fw-bold">개인정보처리방침</a></li>
+                    <li><a href="terms.html">이용약관</a></li>
+                </ul>
             </div>
         </div>
+        <hr class="footer-divider">
+        <p class="small text-white-50 mb-1">신희타 계산기는 LH, 주택도시기금, 금융기관과 관계없는 개인 운영 사이트입니다. 계산 결과는 참고용 모의 계산이며, 실제 대출 조건과 정산 금액은 입주자모집공고와 수탁은행 안내를 따릅니다. <a href="terms.html#disclaimer" class="text-white-50">책임한계 및 고지</a></p>
+        <p class="small text-white-50 mb-0">© 2024–2026 신희타 계산기. All rights reserved.</p>
     </div>
 </footer>
 

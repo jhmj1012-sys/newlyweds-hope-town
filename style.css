@@ -79,3 +79,47 @@ footer a:hover {
     .navbar-custom .nav-item { margin-left: 0 !important; margin-right: 0 !important; }
     .navbar-custom .nav-link { font-size: 0.9rem; padding-left: 0.55rem !important; padding-right: 0.55rem !important; }
 }
+
+/* 상단 메뉴 로고 (넓은 화면에서만) */
+.navbar-custom .navbar-brand { color: #fff; font-size: 1.05rem; }
+
+/* 글 작성자·날짜 */
+.article-meta { font-size: 0.85rem; color: #6c757d; text-align: right; margin-bottom: 20px; }
+.article-meta a { color: #495057; }
+
+/* 홈 본문 */
+.home-content { padding-top: 30px; }
+.home-content .text-content h2:first-child { margin-top: 0; }
+.feature-box { height: 100%; border: 1px solid #e9ecef; border-radius: 12px; padding: 18px; background: #fbfdfc; display: flex; flex-direction: column; gap: 6px; }
+.feature-box i { font-size: 1.5rem; color: var(--primary-color); }
+.feature-box strong { color: #333; }
+.feature-box span { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+/* 글 카드 */
+.article-card { display: flex; flex-direction: column; gap: 6px; height: 100%; padding: 18px; border: 1px solid #e9ecef; border-radius: 12px; background: #fff; color: #333; text-decoration: none; transition: border-color .15s, box-shadow .15s, transform .15s; }
+.article-card:hover { border-color: var(--primary-color); box-shadow: 0 6px 18px rgba(12,166,120,0.12); transform: translateY(-2px); color: #333; }
+.article-card strong { font-size: 1rem; line-height: 1.45; }
+.article-card span:not(.article-tag) { font-size: 0.88rem; color: #666; line-height: 1.6; }
+.article-tag { align-self: flex-start; font-size: 0.72rem; font-weight: 700; color: var(--dark-green); background: #e6fcf5; border-radius: 20px; padding: 2px 10px; }
+
+/* 용어 사전 */
+.glossary dt { font-size: 1.05rem; color: #333; margin-top: 22px; scroll-margin-top: 80px; }
+.glossary dd { margin: 6px 0 0 0; padding-left: 14px; border-left: 3px solid #e9ecef; }
+
+/* 표 안 문단 정렬 보정 */
+.text-content table p, .text-content td { text-align: inherit; }
+
+/* 확장 푸터 */
+.footer-heading { color: #fff; font-weight: 700; font-size: 0.9rem; margin-bottom: 12px; }
+.footer-list li { margin-bottom: 6px; }
+.footer-list a { color: rgba(255,255,255,0.6); text-decoration: none; }
+.footer-divider { border-color: rgba(255,255,255,0.15); opacity: 1; margin: 28px 0 18px; }
+@media (max-width: 991px) {
+    footer .footer-heading { text-align: left; }
+    .footer-list-inline-sm li { display: inline-block; margin-right: 14px; }
+}
+@media (max-width: 576px) {
+    .page-container { padding: 28px 20px; border-radius: 14px; margin-left: 10px; margin-right: 10px; }
+    .content-title { font-size: 1.45rem; }
+    .text-content p { text-align: left; }
+}
