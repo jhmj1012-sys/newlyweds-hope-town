@@ -6,6 +6,10 @@ window.onload = function() {
         startDateInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     }
     
+    // 입력을 고치면 오류 안내를 지움
+    const form = document.getElementById('calcForm');
+    if (form) { form.addEventListener('input', clearFieldErrors); form.addEventListener('change', clearFieldErrors); }
+
     // 정산표 페이지일 경우 테이블 생성
     if (document.getElementById('tableTabs')) {
         generateAllTables();
@@ -23,11 +27,31 @@ function setNum(id, val) {
     const el = document.getElementById(id);
     if(el) el.value = comma(Math.round(val)); 
 }
-function setRate(rate) { document.getElementById('hopeRate').value = rate; }
+function setRate(rate) { document.getElementById('hopeRate').value = rate; clearFieldErrors(); }
+
+// 입력 오류를 팝업 대신 해당 입력칸 바로 아래에 표시
+function showFieldError(id, msg) {
+    clearFieldErrors();
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('is-invalid');
+    el.setAttribute('aria-invalid', 'true');
+    const msgEl = document.createElement('div');
+    msgEl.className = 'field-error';
+    msgEl.setAttribute('role', 'alert');
+    msgEl.textContent = msg;
+    (el.closest('.input-group') || el).insertAdjacentElement('afterend', msgEl);
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.focus({ preventScroll: true });
+}
+function clearFieldErrors() {
+    document.querySelectorAll('.field-error').forEach(e => e.remove());
+    document.querySelectorAll('.is-invalid').forEach(e => { e.classList.remove('is-invalid'); e.removeAttribute('aria-invalid'); });
+}
 
 function setLTV(percent) {
     const price = getNum('purchasePrice');
-    if (price === 0) { alert("분양가를 먼저 입력해주세요"); return; }
+    if (price === 0) { showFieldError('purchasePrice', 'LTV를 고르기 전에 분양가를 먼저 입력해 주세요.'); return; }
     let loan = price * (percent / 100);
     if (loan > 40000) loan = 40000;
     setNum('loanAmount', loan);
@@ -49,6 +73,7 @@ function checkInputs() {
     const loan = getNum('loanAmount');
     const priceText = document.getElementById('text-purchasePrice');
     if (!priceText) return;
+    clearFieldErrors();
     priceText.innerText = koreanMoney(price);
     document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
     document.getElementById('ltvDisplay').innerText = (price > 0 && loan > 0) ? `LTV: ${((loan / price) * 100).toFixed(1)}%` : 'LTV: - %';
@@ -146,8 +171,17 @@ function calculate() {
         
         const durationYears = calcDurationAndCAGR();
 
-        if (price === 0 || loan === 0 || sell === 0) { alert("모든 금액을 0원 이상 입력해주세요."); return; }
-        if (durationYears <= 0) { alert("매도 시기는 입주 시기보다 미래여야 합니다."); return; }
+        const resultBox = document.getElementById('resultBox');
+        const fail = (id, msg) => { resultBox.style.display = 'none'; showFieldError(id, msg); };
+        if (price === 0) return fail('purchasePrice', '분양가를 입력해 주세요.');
+        if (!document.getElementById('startDate').value) return fail('startDate', '입주(대출) 시기를 선택해 주세요.');
+        if (loan === 0) return fail('loanAmount', '대출 금액을 입력하거나 LTV 버튼을 눌러 주세요.');
+        if (isNaN(hopeRate) || hopeRate < 0) return fail('hopeRate', '대출 금리를 입력해 주세요.');
+        if (!document.getElementById('endDate').value) return fail('endDate', '예상 매도 시기를 선택해 주세요.');
+        if (durationYears <= 0) return fail('endDate', '매도 시기는 입주 시기보다 뒤여야 합니다.');
+        if (sell === 0) return fail('sellPrice', '예상 매도 가격을 입력해 주세요.');
+        if (isNaN(normRate) || normRate < 0) return fail('normalRate', '비교용 일반 주담대 금리를 입력해 주세요.');
+        clearFieldErrors();
 
         const gain = sell - price;
         // 담보인정비율 = 대출금액 ÷ 분양가 × 100, 소수점 이하 절사 (부동소수 오차 보정)
@@ -189,11 +223,10 @@ function calculate() {
         else if (diff < 0) { vBox.className = "alert alert-danger text-center fw-bold mb-3"; vBox.innerHTML = `일반대출이 총 ${comma(Math.round(Math.abs(diff)))}만원 더 유리합니다.`; } 
         else { vBox.className = "alert alert-secondary text-center fw-bold mb-3"; vBox.innerText = "수익이 동일합니다."; }
 
-        const resultBox = document.getElementById('resultBox');
         resultBox.style.display = 'block';
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-    } catch (e) { console.error(e); alert("오류가 발생했습니다."); }
+    } catch (e) { console.error(e); showFieldError('purchasePrice', '계산 중 오류가 발생했습니다. 입력값을 확인한 뒤 다시 시도해 주세요.'); }
 }
 
 function calcLoanDetails(principal, annualRate, totalYears, holdYears, graceYears) {
