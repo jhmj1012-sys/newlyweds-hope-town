@@ -2,7 +2,8 @@ window.onload = function() {
     // 날짜 기본값 설정 (계산기 페이지가 아닐 경우 에러 방지)
     const startDateInput = document.getElementById('startDate');
     if (startDateInput) {
-        startDateInput.value = new Date().toISOString().slice(0, 7);
+        const now = new Date();
+        startDateInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     }
     
     // 정산표 페이지일 경우 테이블 생성
@@ -46,14 +47,12 @@ function koreanMoney(val) {
 function checkInputs() {
     const price = getNum('purchasePrice');
     const loan = getNum('loanAmount');
-    if (price > 0 && loan > 0) {
-        const ltv = (loan / price) * 100;
-        document.getElementById('text-purchasePrice').innerText = koreanMoney(price);
-        document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
-        document.getElementById('ltvDisplay').innerText = `LTV: ${ltv.toFixed(1)}%`;
-        const limitMsg = document.getElementById('limitWarning');
-        if (loan > 40000) limitMsg.style.display = 'inline-block'; else limitMsg.style.display = 'none';
-    }
+    const priceText = document.getElementById('text-purchasePrice');
+    if (!priceText) return;
+    priceText.innerText = koreanMoney(price);
+    document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
+    document.getElementById('ltvDisplay').innerText = (price > 0 && loan > 0) ? `LTV: ${((loan / price) * 100).toFixed(1)}%` : 'LTV: - %';
+    document.getElementById('limitWarning').style.display = (loan > 40000) ? 'inline-block' : 'none';
 }
 
 function calcDurationAndCAGR() {
@@ -174,7 +173,10 @@ function calculate() {
         document.getElementById('pmtInterestOnly').innerText = comma(hopeInterestOnly);
         document.getElementById('pmtFull').innerText = comma(hopeMonthly);
         document.getElementById('normPmtFull').innerText = comma(normMonthly);
-        document.getElementById('diffPmt').innerText = comma(diffMonthly);
+        const diffNote = document.getElementById('diffPmtNote');
+        if (diffMonthly > 0) { diffNote.className = 'mt-2 text-danger'; diffNote.innerText = `(월 ${comma(diffMonthly)}원 더 냄)`; }
+        else if (diffMonthly < 0) { diffNote.className = 'mt-2 text-success'; diffNote.innerText = `(월 ${comma(-diffMonthly)}원 덜 냄)`; }
+        else { diffNote.className = 'mt-2 text-muted'; diffNote.innerText = '(월 납부액 동일)'; }
 
         const diff = hopeProfit - normProfit;
         const vBox = document.getElementById('verdictBox');
