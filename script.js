@@ -10,6 +10,10 @@ window.onload = function() {
     const form = document.getElementById('calcForm');
     if (form) { form.addEventListener('input', clearFieldErrors); form.addEventListener('change', clearFieldErrors); }
 
+    // 금리를 직접 고쳐도 1.6%·1.3% 버튼 표시가 따라가게 함
+    const rateInput = document.getElementById('hopeRate');
+    if (rateInput) { rateInput.addEventListener('input', syncRateButtons); syncRateButtons(); }
+
     // 정산표 페이지일 경우 테이블 생성
     if (document.getElementById('tableTabs')) {
         generateAllTables();
@@ -27,7 +31,21 @@ function setNum(id, val) {
     const el = document.getElementById(id);
     if(el) el.value = comma(Math.round(val)); 
 }
-function setRate(rate) { document.getElementById('hopeRate').value = rate; clearFieldErrors(); }
+function setRate(rate) { document.getElementById('hopeRate').value = rate; clearFieldErrors(); syncRateButtons(); }
+
+// LTV·금리 버튼: 지금 입력값과 맞는 버튼을 눌린 상태로 표시
+let selectedLTV = null;
+function markPressed(selector, isOn) {
+    document.querySelectorAll(selector).forEach(btn => {
+        const on = isOn(btn);
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on);
+    });
+}
+function syncRateButtons() {
+    const rate = parseFloat(document.getElementById('hopeRate').value);
+    markPressed('[data-rate]', btn => parseFloat(btn.dataset.rate) === rate);
+}
 
 // 입력 오류를 팝업 대신 해당 입력칸 바로 아래에 표시
 function showFieldError(id, msg) {
@@ -55,6 +73,7 @@ function setLTV(percent) {
     let loan = price * (percent / 100);
     if (loan > 40000) loan = 40000;
     setNum('loanAmount', loan);
+    selectedLTV = percent;
     checkInputs();
 }
 
@@ -78,6 +97,9 @@ function checkInputs() {
     document.getElementById('text-loanAmount').innerText = koreanMoney(loan);
     document.getElementById('ltvDisplay').innerText = (price > 0 && loan > 0) ? `LTV: ${((loan / price) * 100).toFixed(1)}%` : 'LTV: - %';
     document.getElementById('limitWarning').style.display = (loan > 40000) ? 'inline-block' : 'none';
+    // 분양가나 대출 금액을 직접 고쳐 고른 LTV와 달라지면 선택 표시를 지움
+    if (selectedLTV !== null && loan !== Math.round(Math.min(price * selectedLTV / 100, 40000))) selectedLTV = null;
+    markPressed('[data-ltv]', btn => Number(btn.dataset.ltv) === selectedLTV);
 }
 
 function calcDurationAndCAGR() {
