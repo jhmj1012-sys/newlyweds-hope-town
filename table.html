@@ -24,6 +24,7 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="style.css">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7715950782331375" crossorigin="anonymous"></script>
     <script type="application/ld+json">
@@ -53,14 +54,14 @@
 </nav>
 
 <div class="page-container">
-    <h1 class="content-title text-center">📜 수익공유 모기지 정산표</h1>
+    <h1 class="content-title text-center">수익공유 모기지 정산표</h1>
     
     <div class="text-content mb-4">
         <p>신혼희망타운 전용 주택담보대출의 핵심은 <strong>'수익 공유'</strong>입니다. 연 1.6% 고정금리(2023년 8월 30일 이전에 사전청약 또는 본청약 모집공고를 한 단지는 연 1.3%) 혜택을 받는 대신, 주택을 매도하거나 대출을 전액 상환할 때 발생한 시세차익의 일부를 주택도시기금과 정산합니다.</p>
         <p>환수율(정산 비율)은 <strong>①담보인정비율(LTV 30·40·50·60·70% 중 선택), ②자녀 수, ③대출 기간</strong>에 따라 결정됩니다. 아래 표는 수탁은행 상품설명서의 별표1(신혼희망타운 공유형 모기지 정산표)과 같은 숫자입니다. 탭을 눌러 LTV별 상세 비율을 확인하세요.</p>
     </div>
 
-    <ul class="nav nav-tabs mb-0 justify-content-center" id="tableTabs" role="tablist">
+    <ul class="nav nav-tabs ltv-tabs mb-0 justify-content-center" id="tableTabs" role="tablist">
         <li class="nav-item"><button class="nav-link active" id="tab-btn-70" data-bs-toggle="tab" data-bs-target="#content-70" type="button">70%</button></li>
         <li class="nav-item"><button class="nav-link" id="tab-btn-60" data-bs-toggle="tab" data-bs-target="#content-60" type="button">60%</button></li>
         <li class="nav-item"><button class="nav-link" id="tab-btn-50" data-bs-toggle="tab" data-bs-target="#content-50" type="button">50%</button></li>
@@ -77,11 +78,11 @@
     </div>
 
     <div class="info-box mt-4">
-        <strong>💡 표 읽는 법:</strong>
+        <strong><i class="bi bi-lightbulb-fill"></i> 표 읽는 법:</strong>
         <ul class="mb-0 mt-2">
             <li><strong>기본 비율:</strong> 대출기간 1~9년에는 LTV와 자녀 수에 따른 기본 비율(최대 50%)이 적용됩니다. 자녀 수는 분양계약일부터 정산 시점까지 해당 주택에서 함께 살며 가족관계등록부에 오른 만 19세 이하 자녀 수입니다.</li>
             <li><strong>기간 혜택:</strong> 대출기간 10년차부터 매년 정산 비율이 2%p씩 낮아집니다. 예를 들어 LTV 70%·자녀 1명이면 9년차까지 40%, 10년차 38%입니다.</li>
-            <li><strong>최저 비율:</strong> 모든 LTV 구간에서 자녀 0명 20%, 1명 15%, 2명 이상 10%가 최저입니다(굵은 파란 숫자). 최저 비율보다 1%p만 높게 남는 해에는 최저 비율이 바로 적용됩니다.</li>
+            <li><strong>최저 비율:</strong> 모든 LTV 구간에서 자녀 0명 20%, 1명 15%, 2명 이상 10%가 최저입니다(굵은 초록 숫자). 최저 비율보다 1%p만 높게 남는 해에는 최저 비율이 바로 적용됩니다.</li>
             <li><strong>4억 원 한도에 걸리는 경우:</strong> 선택한 LTV로 계산한 대출금이 4억 원을 넘으면 대출금은 4억 원이 되고, 실제 비율(4억 ÷ 분양가, 소수점 이하 절사)에 맞춰 앞뒤 구간 비율을 선형 보간합니다. 예: 분양가 7억 원 → 57% → 10년차·자녀 1명 31.5%.</li>
             <li><strong>집값이 떨어진 경우:</strong> 손실이 발생하면 정산하지 않습니다. 기금이 손실을 나눠 부담하지도 않습니다.</li>
         </ul>

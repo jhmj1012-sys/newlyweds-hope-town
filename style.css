@@ -32,6 +32,7 @@ body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, Blin
     --bs-btn-focus-shadow-rgb: 8, 127, 91;
 }
 .form-control:focus, .form-select:focus { border-color: #63e6be; box-shadow: 0 0 0 .25rem rgba(8,127,91,.2); }
+.form-control::placeholder { color: #6c757d; font-weight: 400; } /* 입력 예시가 굵은 실제 값처럼 보이지 않게 */
 
 .main-header { text-align: center; padding: 40px 20px 20px 20px; }
 .main-header h1 { font-size: 1.8rem; font-weight: 800; color: #333; margin-bottom: 5px; }
@@ -39,6 +40,7 @@ body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, Blin
 
 .page-container { max-width: 800px; margin: 0 auto 60px auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; padding: 40px; }
 .calc-container { max-width: 600px; } /* 계산기는 조금 더 좁게 */
+.navbar-custom + .page-container { margin-top: 40px; } /* 하위 페이지: 메뉴와 카드 사이 여백 (홈은 .main-header가 대신함) */
 
 .step-section { margin-bottom: 25px; border: 1px solid #eee; border-radius: 12px; padding: 20px; background-color: #fff; position: relative; }
 .step-badge { position: absolute; top: -12px; left: 15px; background: #333; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
@@ -64,6 +66,7 @@ body { background-color: #f0f2f5; font-family: 'Pretendard', -apple-system, Blin
 
 /* 결과 박스 */
 .result-box { background-color: #f8f9fa; border-radius: 15px; padding: 25px; border: 1px solid #e9ecef; }
+.result-box .alert { word-break: keep-all; } /* 결론 문장이 낱글자로 줄바꿈되지 않게 */
 .cagr-badge { font-size: 0.85rem; margin-top: 8px; display: block; text-align: right; color: var(--dark-green); font-weight: bold; }
 .pmt-amount { white-space: nowrap; } /* 금액이 숫자 중간에서 줄바꿈되지 않게 */
 
@@ -167,11 +170,15 @@ footer a:hover {
 }
 @media (max-width: 576px) {
     .page-container { padding: 28px 20px; border-radius: 14px; margin-left: 10px; margin-right: 10px; }
+    .navbar-custom + .page-container { margin-top: 24px; }
     .result-box { padding: 18px 14px; }
     .content-title { font-size: 1.45rem; }
     .text-content p { text-align: left; }
+    /* 정산표 LTV 탭 5개를 한 줄에 균등 분할 */
+    .ltv-tabs { flex-wrap: nowrap; }
+    .ltv-tabs .nav-item { flex: 1 1 0; }
+    .ltv-tabs .nav-link { width: 100%; padding-left: 0; padding-right: 0; }
 }
 
 /* 계산기 입력 오류 안내 */
 .field-error { color: #dc3545; font-size: 0.82rem; font-weight: 600; margin-top: 5px; }
-.field-error::before { content: "⚠ "; }
