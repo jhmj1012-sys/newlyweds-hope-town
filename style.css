@@ -71,17 +71,22 @@ footer a:hover {
 /* 푸터 링크 구분선 */
 .footer-links .list-inline-item:not(:last-child)::after { content: "|"; color: #6c757d; margin-left: 0.5rem; }
 
-/* 모바일 상단 메뉴: 한 줄 유지, 넘치면 가로 스크롤 */
-.navbar-custom .nav-link { white-space: nowrap; }
-@media (max-width: 576px) {
-    .navbar-custom .navbar-nav { flex-wrap: nowrap; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
-    .navbar-custom .navbar-nav::-webkit-scrollbar { display: none; }
-    .navbar-custom .nav-item { margin-left: 0 !important; margin-right: 0 !important; }
-    .navbar-custom .nav-link { font-size: 0.9rem; padding-left: 0.55rem !important; padding-right: 0.55rem !important; }
-}
-
-/* 상단 메뉴 로고 (넓은 화면에서만) */
+/* 상단 메뉴: 넓은 화면은 가로, 좁은 화면(992px 미만)은 접이식 */
+.navbar-custom { min-height: 56px; }
 .navbar-custom .navbar-brand { color: #fff; font-size: 1.05rem; }
+.navbar-custom .navbar-brand:hover { color: #fff; }
+.navbar-custom .nav-link { white-space: nowrap; }
+.navbar-custom .navbar-toggler { border-color: rgba(255,255,255,0.5); padding: 4px 8px; }
+.navbar-custom .navbar-toggler:focus { box-shadow: 0 0 0 2px rgba(255,255,255,0.5); }
+@media (min-width: 992px) {
+    .navbar-custom .nav-link { padding-left: 0.85rem !important; padding-right: 0.85rem !important; }
+}
+@media (max-width: 991.98px) {
+    .navbar-custom .navbar-collapse { max-height: calc(100vh - 56px); overflow-y: auto; padding-bottom: 8px; }
+    .navbar-custom .nav-link { padding: 11px 6px; border-bottom: 1px solid rgba(255,255,255,0.18); }
+    .navbar-custom .nav-item:last-child .nav-link { border-bottom: none; }
+    .navbar-custom .nav-link.active { border-bottom: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.15); border-radius: 6px; padding-left: 10px; }
+}
 
 /* 글 작성자·날짜 */
 .article-meta { font-size: 0.85rem; color: #6c757d; text-align: right; margin-bottom: 20px; }
@@ -133,3 +138,7 @@ footer a:hover {
     .content-title { font-size: 1.45rem; }
     .text-content p { text-align: left; }
 }
+
+/* 계산기 입력 오류 안내 */
+.field-error { color: #dc3545; font-size: 0.82rem; font-weight: 600; margin-top: 5px; }
+.field-error::before { content: "⚠ "; }

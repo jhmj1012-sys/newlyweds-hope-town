@@ -11,6 +11,11 @@ const INCOME_2026 = {
 };
 const ASSET_LIMIT_2026 = 362000000; // 총자산 3억 6,200만 원 이하
 const MORTGAGE_MIN_RATIO = 0.3;     // 총자산 기준을 넘는 주택은 주택가격의 30% 이상 모기지 가입
+// 2023.3.28 이후 출산 가구 완화: 자녀 1명 소득 +10%p·총자산 3억 9,700만 원, 2명 이상 +20%p·4억 3,100만 원
+const BIRTH_RELIEF = { 1: { pct: 10, asset: 397000000 }, 2: { pct: 20, asset: 431000000 } };
+
+// 표에 없는 비율(150% 등)은 100% 금액에서 계산
+function incomeAt(t, pct) { return t[pct] !== undefined ? t[pct] : Math.round(t[100] * pct / 100); }
 
 function qVal(id) { return document.getElementById(id).value; }
 function qNum(id) { return Number(String(qVal(id)).replace(/[^\d]/g, '')) || 0; }
@@ -48,6 +53,7 @@ function qualifyCheck() {
     const kids = Number(qVal('qKids'));
     const homeless = Number(qVal('qHomeless'));
     const price = qNum('qPrice') * 10000;
+    const birth = qVal('qBirth') === 'yes';
     const box = document.getElementById('qResult');
 
     if (!document.getElementById('qIncome').value || !document.getElementById('qAsset').value) {
@@ -60,7 +66,7 @@ function qualifyCheck() {
     const childUnder7 = childAge === 'le2' || childAge === 'le6';
     let basicOk, basicText;
     if (type === 'engaged') {
-        basicOk = true; basicText = '예비신혼부부는 입주 전까지 혼인 사실을 증명하면 됩니다(2026년 6월 개정).';
+        basicOk = true; basicText = '예비신혼부부는 정해진 기한 안에 혼인 사실을 증명해야 합니다(2026년 6월 "입주 전까지"로 완화 발표, 내 단지 공고문의 기한 확인).';
     } else if (type === 'single') {
         basicOk = childUnder7; basicText = basicOk ? '만 6세 이하 자녀를 둔 한부모가족입니다.' : '한부모가족은 만 6세 이하 자녀(태아 포함)가 있어야 합니다.';
     } else {
@@ -69,14 +75,20 @@ function qualifyCheck() {
     }
 
     // 2. 청약통장, 3. 자산
+    // 출산가구 완화는 맞벌이 기준에 더하는 방식이 공고마다 달라, 확인된 기본 130%에만 더해 보수적으로 계산
+    const relief = birth ? BIRTH_RELIEF[kids >= 2 ? 2 : 1] : null;
+    const assetLimit = relief ? relief.asset : ASSET_LIMIT_2026;
     const accountOk = account >= 1;
-    const assetOk = asset <= ASSET_LIMIT_2026;
+    const assetOk = asset <= assetLimit;
 
     // 4. 소득: 1·2단계(배점)는 130%(맞벌이 140%), 3단계(추첨)는 130%(맞벌이 200%)
     const t = INCOME_2026[size];
     const ratio = income / t[100] * 100;
-    const limitScored = dual ? t[140] : t[130];
-    const limitLottery = dual ? t[200] : t[130];
+    const basePct = 130 + (relief ? relief.pct : 0);
+    const scoredPct = dual ? Math.max(140, basePct) : basePct;
+    const lotteryPct = dual ? Math.max(200, basePct) : basePct;
+    const limitScored = incomeAt(t, scoredPct);
+    const limitLottery = incomeAt(t, lotteryPct);
     const scoredOk = income <= limitScored;
     const lotteryOk = income <= limitLottery;
 
@@ -95,10 +107,11 @@ function qualifyCheck() {
     const rows = [
         qRow(basicOk, '신청 자격', basicText),
         qRow(accountOk, '청약통장', accountOk ? '가입 6개월·납입인정 6회 이상을 충족합니다.' : '가입 6개월 경과와 납입인정횟수 6회 이상이 필요합니다.'),
-        qRow(assetOk, '총자산', `${manwon(asset)} / 기준 ${manwon(ASSET_LIMIT_2026)} 이하`),
-        qRow(scoredOk, '소득(1·2단계)', `${manwon(income)} = 기준소득의 ${ratio.toFixed(1)}% / 한도 ${dual ? '140%' : '130%'} ${manwon(limitScored)} 이하`)
+        qRow(assetOk, '총자산', `${manwon(asset)} / 기준 ${manwon(assetLimit)} 이하${relief ? ' (출산가구 완화)' : ''}`),
+        qRow(scoredOk, '소득(1·2단계)', `${manwon(income)} = 기준소득의 ${ratio.toFixed(1)}% / 한도 ${scoredPct}% ${manwon(limitScored)} 이하`)
     ];
-    if (dual) rows.push(qRow(lotteryOk, '소득(3단계 추첨)', `맞벌이는 200% ${manwon(t[200])} 이하까지 추첨에 신청할 수 있습니다.`));
+    if (dual) rows.push(qRow(lotteryOk, '소득(3단계 추첨)', `맞벌이는 ${lotteryPct}% ${manwon(limitLottery)} 이하까지 추첨에 신청할 수 있습니다.`));
+    if (relief) rows.push(qRow(null, '출산가구 완화', `소득 기준 +${relief.pct}%p와 총자산 ${manwon(relief.asset)} 기준을 적용했습니다.${dual ? ' 맞벌이 기준(140%·200%)에 완화를 더하는 방식은 공고문마다 다르므로 여기서는 더하지 않았습니다. 기준선 근처라면 공고문이나 LH(1600-1004)에 확인하세요.' : ''}`));
 
     let verdictClass, verdict, scoreHtml = '';
     if (!basicOk || !accountOk || !assetOk) {
@@ -109,7 +122,7 @@ function qualifyCheck() {
         verdict = '소득이 기준을 넘어 신청할 수 없습니다.';
     } else if (!scoredOk) {
         verdictClass = 'alert-warning';
-        verdict = '1·2단계(배점) 소득 기준은 넘지만, 맞벌이 200% 이하라 <strong>3단계 추첨</strong>에는 신청할 수 있습니다.';
+        verdict = `1·2단계(배점) 소득 기준은 넘지만, 맞벌이 ${lotteryPct}% 이하라 <strong>3단계 추첨</strong>에는 신청할 수 있습니다.`;
     } else {
         verdictClass = 'alert-success';
         verdict = stage1
