@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://신희타계산기.kr/sitemap.xml
+Sitemap: https://xn--989a00a691b76bpv1a1ej.kr/sitemap.xml
