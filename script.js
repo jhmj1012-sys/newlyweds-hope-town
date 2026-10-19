@@ -57,7 +57,8 @@ function showFieldError(id, msg) {
     const msgEl = document.createElement('div');
     msgEl.className = 'field-error';
     msgEl.setAttribute('role', 'alert');
-    msgEl.textContent = msg;
+    msgEl.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> ';
+    msgEl.append(msg);
     (el.closest('.input-group') || el).insertAdjacentElement('afterend', msgEl);
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
     el.focus({ preventScroll: true });
@@ -138,7 +139,7 @@ function updateCAGR(obj) {
     const display = document.getElementById('cagrDisplay');
     if (buy > 0 && sell > 0 && years >= 1) {
         const cagr = (Math.pow(sell / buy, 1 / years) - 1) * 100;
-        display.innerText = `🏠 연평균 상승률: ${cagr.toFixed(2)}%`;
+        display.innerHTML = `<i class="bi bi-house-door"></i> 연평균 상승률: ${cagr.toFixed(2)}%`;
     } else { display.innerText = ""; }
 }
 
@@ -241,8 +242,8 @@ function calculate() {
 
         const diff = hopeProfit - normProfit;
         const vBox = document.getElementById('verdictBox');
-        if (diff > 0) { vBox.className = "alert alert-success text-center fw-bold mb-3"; vBox.innerHTML = `신희타가 총 ${comma(Math.round(diff))}만원 더 유리합니다! 🎉`; } 
-        else if (diff < 0) { vBox.className = "alert alert-danger text-center fw-bold mb-3"; vBox.innerHTML = `일반대출이 총 ${comma(Math.round(Math.abs(diff)))}만원 더 유리합니다.`; } 
+        if (diff > 0) { vBox.className = "alert alert-success text-center fw-bold mb-3"; vBox.innerHTML = `<i class="bi bi-check-circle-fill"></i> 신희타가 총 ${comma(Math.round(diff))}만원 더 유리합니다!`; } 
+        else if (diff < 0) { vBox.className = "alert alert-danger text-center fw-bold mb-3"; vBox.innerHTML = `<i class="bi bi-exclamation-circle-fill"></i> 일반대출이 총 ${comma(Math.round(Math.abs(diff)))}만원 더 유리합니다.`; } 
         else { vBox.className = "alert alert-secondary text-center fw-bold mb-3"; vBox.innerText = "수익이 동일합니다."; }
 
         resultBox.style.display = 'block';
