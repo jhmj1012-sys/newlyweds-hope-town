@@ -14,6 +14,9 @@ window.onload = function() {
     const rateInput = document.getElementById('hopeRate');
     if (rateInput) { rateInput.addEventListener('input', syncRateButtons); syncRateButtons(); }
 
+    // 주소에 입력값이 있으면 채워서 바로 계산
+    if (form) applyUrlParams();
+
     // 정산표 페이지일 경우 테이블 생성
     if (document.getElementById('tableTabs')) {
         generateAllTables();
@@ -76,6 +79,54 @@ function setLTV(percent) {
     setNum('loanAmount', loan);
     selectedLTV = percent;
     checkInputs();
+}
+
+// 결과 링크: /?price=45000&ltv=60&kids=1&years=10&sell=60000 처럼 입력값을 주소로 받아 바로 계산
+// price·loan·sell 만원, ltv %, kids 0~2(2는 2명 이상), start·end YYYY-MM, years 보유 연수, rate·normal %, term 20|30
+function applyUrlParams() {
+    const q = new URLSearchParams(location.search);
+    if (!q.has('price')) return;
+    const num = key => {
+        if (!q.has(key)) return null;
+        const v = parseFloat(q.get(key).replace(/,/g, ''));
+        return isFinite(v) && v >= 0 ? v : null;
+    };
+    const month = key => /^\d{4}-(0[1-9]|1[0-2])$/.test(q.get(key) || '') ? q.get(key) : null;
+    const byId = id => document.getElementById(id);
+
+    if (num('price')) setNum('purchasePrice', num('price'));
+    if (num('kids') !== null) byId('kids').value = String(Math.min(2, Math.floor(num('kids'))));
+    if (month('start')) byId('startDate').value = month('start');
+    if (num('rate') !== null) byId('hopeRate').value = num('rate');
+    if (num('term') === 20 || num('term') === 30) byId('termOptions').value = String(num('term'));
+    if (num('normal') !== null) byId('normalRate').value = num('normal');
+    if (num('sell')) setNum('sellPrice', num('sell'));
+
+    if (num('loan')) setNum('loanAmount', num('loan'));
+    else if (num('ltv') > 0 && num('ltv') <= 70 && num('price')) setLTV(num('ltv'));
+
+    if (month('end')) byId('endDate').value = month('end');
+    else if (num('years') > 0 && byId('startDate').value) {
+        const [y, m] = byId('startDate').value.split('-').map(Number);
+        const t = y * 12 + (m - 1) + Math.round(num('years') * 12);
+        byId('endDate').value = `${Math.floor(t / 12)}-${String(t % 12 + 1).padStart(2, '0')}`;
+    }
+
+    checkInputs();
+    syncRateButtons();
+    if (byId('endDate').value) calcDurationAndCAGR();
+    calculate();
+}
+
+// 계산한 입력값을 주소에 남겨 결과 링크를 그대로 공유할 수 있게 함
+function updateResultUrl() {
+    const q = new URLSearchParams({
+        price: getNum('purchasePrice'), loan: getNum('loanAmount'), kids: document.getElementById('kids').value,
+        start: document.getElementById('startDate').value, end: document.getElementById('endDate').value,
+        sell: getNum('sellPrice'), rate: document.getElementById('hopeRate').value,
+        term: document.getElementById('termOptions').value, normal: document.getElementById('normalRate').value
+    });
+    try { history.replaceState(null, '', `${location.pathname}?${q}`); } catch (e) {}
 }
 
 function koreanMoney(val) {
@@ -247,6 +298,7 @@ function calculate() {
         else { vBox.className = "alert alert-secondary text-center fw-bold mb-3"; vBox.innerText = "수익이 동일합니다."; }
 
         resultBox.style.display = 'block';
+        updateResultUrl();
         resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     } catch (e) { console.error(e); showFieldError('purchasePrice', '계산 중 오류가 발생했습니다. 입력값을 확인한 뒤 다시 시도해 주세요.'); }
